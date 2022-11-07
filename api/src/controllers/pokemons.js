@@ -1,7 +1,7 @@
 const axios = require("axios");
 const { Pokemon, Type } = require("../db");
 
-const getAllPokemons = async () => {
+const getAll = async () => {
   const info = await axios.get("https://pokeapi.co/api/v2/pokemon");
   const info2 = await axios.get(info.data.next);
 
@@ -35,7 +35,12 @@ const getAllPokemons = async () => {
   return [...pokemons, ...dbPokemons]; //! Por qué una copia?
 };
 
-const getPokemon = async (value, filter) => {
+const getPokemon = async (filter, value) => {
+  if (filter !== "id" || (filter === "id" && isNaN(value))) {
+    const dbPokemon = await Pokemon.findOne({ where: { [filter]: value } });
+    if (dbPokemon) return dbPokemon;
+  }
+
   const apiPokemon = await axios.get(
     "https://pokeapi.co/api/v2/pokemon/" + value
   );
@@ -44,7 +49,6 @@ const getPokemon = async (value, filter) => {
 
   if (filter === "id") {
     pokemon = {
-      // nombre, imagen, tipos, id, vida, ataque, defensa, velocidad, altura, peso
       id: apiPokemon.data.id,
       name: apiPokemon.data.name,
       image: apiPokemon.data.sprites.other["official-artwork"].front_default,
@@ -61,23 +65,15 @@ const getPokemon = async (value, filter) => {
     };
   } else {
     pokemon = {
-      // nombre, imagen, tipos
       name: apiPokemon.data.name,
       image: apiPokemon.data.sprites.other["official-artwork"].front_default,
       types: apiPokemon.data.types.map((el) => el.type.name),
     };
   } //*Else en caso de error
-
-  //!GET FROM DB
   return pokemon;
 };
 
-//   pokemonRouter.post("/", (req, res) => {
-//     res.status(200).send("POST pokemon");
-//   });
-
 module.exports = {
-  getAllPokemons,
+  getAll,
   getPokemon,
-  //   postPokemon,
 };
