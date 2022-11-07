@@ -1,4 +1,5 @@
 const axios = require("axios");
+const { Pokemon, Type } = require("../db");
 
 const getAllPokemons = async () => {
   const info = await axios.get("https://pokeapi.co/api/v2/pokemon");
@@ -20,16 +21,56 @@ const getAllPokemons = async () => {
       types,
     });
   }
-  return pokemons;
-};
-// pokemonRouter.get("/", (req, res) => {
-//     const { name } = req.query;
-//     res.status(200).send(name ? "GET pokemons " + name : "GET all pokemons");
-//   });
 
-//   pokemonRouter.get("/:id", (req, res) => {
-//     res.status(200).send("GET pokemon " + req.params.id);
-//   });
+  const dbPokemons = await Pokemon.findAll({
+    include: {
+      model: Type,
+      attributes: ["name"],
+      through: {
+        attributes: [],
+      },
+    },
+  });
+
+  return [...pokemons, ...dbPokemons]; //! Por qué una copia?
+};
+
+const getPokemon = async (value, filter) => {
+  const apiPokemon = await axios.get(
+    "https://pokeapi.co/api/v2/pokemon/" + value
+  );
+
+  let pokemon = {};
+
+  if (filter === "id") {
+    pokemon = {
+      // nombre, imagen, tipos, id, vida, ataque, defensa, velocidad, altura, peso
+      id: apiPokemon.data.id,
+      name: apiPokemon.data.name,
+      image: apiPokemon.data.sprites.other["official-artwork"].front_default,
+      hp: apiPokemon.data.stats.find((el) => el.stat.name === "hp").base_stat,
+      attack: apiPokemon.data.stats.find((el) => el.stat.name === "attack")
+        .base_stat,
+      defense: apiPokemon.data.stats.find((el) => el.stat.name === "defense")
+        .base_stat,
+      speed: apiPokemon.data.stats.find((el) => el.stat.name === "speed")
+        .base_stat,
+      height: apiPokemon.data.height,
+      weight: apiPokemon.data.weight,
+      types: apiPokemon.data.types.map((el) => el.type.name),
+    };
+  } else {
+    pokemon = {
+      // nombre, imagen, tipos
+      name: apiPokemon.data.name,
+      image: apiPokemon.data.sprites.other["official-artwork"].front_default,
+      types: apiPokemon.data.types.map((el) => el.type.name),
+    };
+  } //*Else en caso de error
+
+  //!GET FROM DB
+  return pokemon;
+};
 
 //   pokemonRouter.post("/", (req, res) => {
 //     res.status(200).send("POST pokemon");
@@ -37,7 +78,6 @@ const getAllPokemons = async () => {
 
 module.exports = {
   getAllPokemons,
-  //   getPokemonsByName,
-  //   getPokemonById,
+  getPokemon,
   //   postPokemon,
 };
