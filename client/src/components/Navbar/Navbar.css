@@ -1,0 +1,14 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: #333;
+}
+
+.navbar a {
+  margin: auto;
+  color: rgb(0, 217, 255);
+}
+
+.navbar a.active {
+  color: yellow;
+}
