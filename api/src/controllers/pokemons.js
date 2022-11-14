@@ -16,6 +16,7 @@ const getAll = async () => {
     }
 
     pokemons.push({
+      id: infoPokemon.data.id,
       name: infoPokemon.data.name,
       image: infoPokemon.data.sprites.other["official-artwork"].front_default,
       types,

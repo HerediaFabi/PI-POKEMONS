@@ -9,10 +9,14 @@ const PokemonCard = (props) => {
       <img src={props.image} alt={props.name} />
       <div className="types">
         {props.types.map((t) => {
-          return <p className="type">{t}</p>;
+          return (
+            <p className="type" key={t}>
+              {t}
+            </p>
+          );
         })}
       </div>
-      <Link to={`/pokemon`}>Ver detalle</Link>
+      <Link to={`/pokemons/${props.id}`}>Ver detalle</Link>
     </div>
   );
 };

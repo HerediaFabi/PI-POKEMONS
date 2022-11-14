@@ -1,11 +1,15 @@
 import React from "react";
 import "./About.css";
+import Navbar from "../Navbar/Navbar";
 
 const About = (props) => {
   return (
-    <div>
-      <h1>COMPONENTE ABOUT</h1>
-    </div>
+    <>
+      <Navbar />
+      <div>
+        <h1>COMPONENTE ABOUT</h1>
+      </div>
+    </>
   );
 };
 
