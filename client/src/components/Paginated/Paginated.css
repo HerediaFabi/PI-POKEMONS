@@ -1,0 +1,33 @@
+.paginated {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.page label {
+  margin: 1rem 0.5rem;
+  background-color: #333;
+  font-size: 20px;
+  display: flex;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  text-shadow: 1px 0 #000, -1px 0 #000, 0 1px #000, 0 -1px #000, 1px 1px #000,
+    -1px -1px #000, 1px -1px #000, -1px 1px #000;
+  box-shadow: 0 5px 0 #000;
+}
+
+.page label:hover {
+  background-color: #ff9c46;
+  cursor: pointer;
+}
+
+input[type="radio"]:checked + label {
+  box-shadow: 0 1px #000;
+  transform: translateY(4px);
+  background-color: #24a2c6;
+}
+
+input[type="radio"] {
+  display: none;
+}

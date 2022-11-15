@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getPokemons } from "../../redux/actions";
 import "./LandingPage.css";
 import { Link } from "react-router-dom";
 
 const LandingPage = (props) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPokemons());
+  }, [dispatch]);
+
   return (
     <div className="landing">
       <div className="mountain1"></div>
@@ -10,6 +18,7 @@ const LandingPage = (props) => {
       <div className="infoLanding">
         <div className="sectionLanding1">
           <img
+            id="pokemon-logo"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/2560px-International_Pok%C3%A9mon_logo.svg.png"
             alt=""
           />

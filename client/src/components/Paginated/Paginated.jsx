@@ -1,6 +1,7 @@
 import React from "react";
+import "./Paginated.css";
 
-const Paginado = ({ paginated, array }) => {
+const Paginated = ({ paginated, array, name, currentPage }) => {
   let pages = [1];
   const pokemonsPerPage = 12;
   let contador = 1;
@@ -16,18 +17,18 @@ const Paginado = ({ paginated, array }) => {
   pages.pop();
 
   return (
-    <div className="paginado">
+    <div className="paginated">
       {pages.map((page) => {
         return (
-          <div key={page}>
+          <div key={page} className="page">
             <input
               onChange={() => {
                 paginated(page);
               }}
               type="radio"
-              name="pageNumber"
+              name={name}
               id={page}
-              defaultChecked={page === 1}
+              checked={page === currentPage}
             />
             <label htmlFor={page}>{page}</label>
           </div>
@@ -38,4 +39,4 @@ const Paginado = ({ paginated, array }) => {
 
   //
 };
-export default Paginado;
+export default Paginated;

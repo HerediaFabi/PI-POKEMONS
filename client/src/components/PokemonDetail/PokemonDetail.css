@@ -1,0 +1,52 @@
+.detail {
+  display: flex;
+  margin-top: 60px;
+  background-color: blue;
+  justify-content: center;
+}
+
+.detail-card {
+  display: flex;
+  justify-content: center;
+  width: 25rem;
+  flex-wrap: wrap;
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: #ccc;
+  margin: 1rem;
+  border-radius: 5px;
+  box-shadow: -5px 5px 3px #000;
+  background-color: #222;
+  border: 1px solid #000;
+  transition: 1s;
+}
+
+.detail-card img {
+  width: 20rem;
+}
+
+.section-group {
+  background-color: blueviolet;
+  margin-bottom: 5px;
+  display: flex;
+}
+
+.detail-section {
+  background-color: red;
+  width: 100%;
+  margin: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.detail-section div {
+  background-color: orangered;
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+}
+
+.detail-section div img {
+  /* display: ; */
+  position: static;
+  filter: invert(100%);
+}

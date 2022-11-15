@@ -5,33 +5,91 @@
 }
 
 .home {
+  margin-top: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.container {
-  background-color: red;
-}
-
 .pokemons {
-  background-color: blue;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .filters {
-  background-color: green;
+  margin-top: 5px;
   display: flex;
+  justify-content: space-around;
+}
+
+.filters div {
+  margin: 5px;
+  /* padding: 5px; */
+  border-radius: 5px;
+}
+
+.filters div input,
+.filters div button,
+.filters div select {
+  display: inline;
+  flex-wrap: wrap;
+  height: 40px;
+  background-color: #ccc;
+  color: #000;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 1px solid #000;
+  box-shadow: 0 5px 0 #000;
+  top: -2px;
+  position: relative;
+  /* text-shadow: 1px 0 #000, -1px 0 #000, 0 1px #000, 0 -1px #000, 1px 1px #000,
+    -1px -1px #000, 1px -1px #000, -1px 1px #000; */
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #000;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #000;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #000;
+}
+
+.filters div input:hover,
+.filters div button:hover,
+.filters div select:hover {
+  background-color: #fff;
+}
+
+.filters div button:active {
+  background-color: #38bf4b;
+  color: #fff;
+  box-shadow: 0 0 25px #38bf4b;
+  transform: translateY(4px);
+}
+
+.filters div input:focus,
+.filters div select:focus {
+  border: 1px solid #000;
+  transform: translateY(4px);
+  background-color: #ff5470;
+  box-shadow: 0 0 25px #ff5470;
+  outline: none;
 }
 
 .wrapper {
   position: absolute;
   top: 50%;
-  /* left: 50%; */
   transform: translate(-50%, -50%);
-  /* background-color: aqua; */
   display: flex;
   width: 100px;
   flex-wrap: wrap;

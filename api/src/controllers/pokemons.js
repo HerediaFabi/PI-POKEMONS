@@ -5,7 +5,7 @@ const getAll = async () => {
   const info = await axios.get("https://pokeapi.co/api/v2/pokemon");
   const info2 = await axios.get(info.data.next);
 
-  const mergeResults = [...info.data.results, ...info2.data.results]; //? TRAER 40 POKEMONES
+  const mergeResults = [...info.data.results]; //? TRAER 40 POKEMONES
 
   let pokemons = [];
   for (let i = 0; i < mergeResults.length; i++) {

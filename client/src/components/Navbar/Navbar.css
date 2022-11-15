@@ -1,14 +1,65 @@
 .navbar {
+  top: 0;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2%;
+  background-color: #222a;
+  backdrop-filter: blur(2px);
+  height: 60px;
+  width: 100%;
+  z-index: 99;
+}
+
+.navbar div {
   display: flex;
   align-items: center;
-  background-color: #333;
 }
 
-.navbar a {
-  margin: auto;
-  color: rgb(0, 217, 255);
+.navbar div img {
+  width: 30px;
+  height: 30px;
+  filter: saturate(200%) hue-rotate(35deg);
 }
 
-.navbar a.active {
-  color: yellow;
+.navbar div img:hover {
+  filter: saturate(200%) hue-rotate(35deg) drop-shadow(0 0 15px #fff);
+}
+
+.navbar div a.navlink {
+  font-weight: bold;
+  font-size: 17px;
+  margin: 0 0.5rem;
+  text-decoration: none;
+  color: #fff;
+  text-align: center;
+  text-shadow: 1px 0 #000, -1px 0 #000, 0 1px #000, 0 -1px #000, 1px 1px #000,
+    -1px -1px #000, 1px -1px #000;
+  background-color: #555;
+  /* height: 0; */
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid #000;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 3px 0 #000;
+}
+
+.navbar .home-link {
+  background-color: unset;
+  border: unset;
+}
+
+.navbar a.navlink:hover {
+  background-color: #17285e;
+}
+
+.navbar a.navlink.active {
+  background-color: #0b61b3;
+}
+
+.navbar a.navlink:active {
+  box-shadow: 0 0 #000;
+  transform: translateY(4px);
 }

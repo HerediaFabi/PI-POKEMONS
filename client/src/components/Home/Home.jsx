@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemons } from "../../redux/actions";
 import PokemonCard from "../PokemonCard/PokemonCard";
-import Paginado from "../Paginado/Paginado";
+import Paginated from "../Paginated/Paginated";
 import Navbar from "../Navbar/Navbar";
 import "./Home.css";
 
@@ -18,9 +18,9 @@ const Home = (props) => {
     setCurrentPage(page);
   };
 
-  useEffect(() => {
-    dispatch(getPokemons());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getPokemons());
+  // }, [dispatch]);
 
   return (
     <>
@@ -35,6 +35,9 @@ const Home = (props) => {
               </div>
               <div id="pkmByOrigin">
                 <select name="" id="">
+                  <option disabled value="">
+                    Select origin
+                  </option>
                   <option value="all">All pokemons</option>
                   <option value="api">API pokemons</option>
                   <option value="db">Database pokemons</option>
@@ -42,6 +45,9 @@ const Home = (props) => {
               </div>
               <div id="alphabeticOrder">
                 <select name="" id="">
+                  <option value="" disabled>
+                    Select order
+                  </option>
                   <option value="indistinct">Indistinct</option>
                   <option value="a_z">A-Z</option>
                   <option value="z_a">Z-A</option>
@@ -49,6 +55,9 @@ const Home = (props) => {
               </div>
               <div id="attackOrder">
                 <select name="" id="">
+                  <option value="" disabled>
+                    Select stat
+                  </option>
                   <option value="indistinct">Indistinct</option>
                   <option value="max_attack">Max attack</option>
                   <option value="min_attack">Min attack</option>
@@ -56,7 +65,13 @@ const Home = (props) => {
               </div>
             </div>
             <div className="pokemons">
-              <Paginado key="paginado" array={pokemons} paginated={paginated} />
+              <Paginated
+                key="paginated"
+                array={pokemons}
+                paginated={paginated}
+                name="paginado1"
+                currentPage={currentPage}
+              />
               {currentPokemons?.map((pokemon) => {
                 return (
                   <PokemonCard
@@ -68,6 +83,13 @@ const Home = (props) => {
                   />
                 );
               })}
+              <Paginated
+                key="paginated"
+                array={pokemons}
+                paginated={paginated}
+                name="paginado2"
+                currentPage={currentPage}
+              />
             </div>
           </div>
         ) : (

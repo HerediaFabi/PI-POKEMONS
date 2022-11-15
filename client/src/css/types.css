@@ -1,0 +1,141 @@
+div .icon {
+  margin: 0 1rem 0.5rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.icon {
+  border-radius: 100%;
+  height: 50px;
+  width: 50px;
+  margin: auto;
+  box-shadow: 0 5px 0 #000;
+  border: 1px solid #000;
+  transition: 200ms all;
+}
+
+.icon:hover {
+  filter: saturate(200%);
+  cursor: pointer;
+  top: 4px;
+  padding-bottom: 0px;
+  box-shadow: 0 1px 0 #000;
+}
+
+.icon.bug {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/3c/Pok%C3%A9mon_Bug_Type_Icon.svg);
+  background-color: #92bc2c;
+}
+
+.icon.dark {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/0/09/Pok%C3%A9mon_Dark_Type_Icon.svg);
+  background-color: #595761;
+}
+
+.icon.dragon {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/a/a6/Pok%C3%A9mon_Dragon_Type_Icon.svg);
+  background-color: #0c69c8;
+}
+
+.icon.electric {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/a/a9/Pok%C3%A9mon_Electric_Type_Icon.svg);
+  background-color: #f2d94e;
+}
+
+.icon.fire {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/5/56/Pok%C3%A9mon_Fire_Type_Icon.svg);
+  background-color: #fba54c;
+}
+
+.icon.fairy {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/0/08/Pok%C3%A9mon_Fairy_Type_Icon.svg);
+  background-color: #ee90e6;
+}
+
+.icon.fighting {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Pok%C3%A9mon_Fighting_Type_Icon.svg);
+  background-color: #d3425f;
+}
+
+.icon.flying {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/e/e0/Pok%C3%A9mon_Flying_Type_Icon.svg);
+  background-color: #a1bbec;
+}
+
+.icon.ghost {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/a/a0/Pok%C3%A9mon_Ghost_Type_Icon.svg);
+  background-color: #5f6dbc;
+}
+
+.icon.grass {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/f/f6/Pok%C3%A9mon_Grass_Type_Icon.svg);
+  background-color: #5fbd58;
+}
+
+.icon.ground {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/8/8d/Pok%C3%A9mon_Ground_Type_Icon.svg);
+  background-color: #da7c4d;
+}
+
+.icon.ice {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/8/88/Pok%C3%A9mon_Ice_Type_Icon.svg);
+  background-color: #75d0c1;
+}
+
+.icon.normal {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/a/aa/Pok%C3%A9mon_Normal_Type_Icon.svg);
+  background-color: #a0a29f;
+}
+
+.icon.poison {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/c/c4/Pok%C3%A9mon_Poison_Type_Icon.svg);
+  background-color: #b763cf;
+}
+
+.icon.psychic {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/a/ab/Pok%C3%A9mon_Psychic_Type_Icon.svg);
+  background-color: #fa8581;
+}
+
+.icon.rock {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/bb/Pok%C3%A9mon_Rock_Type_Icon.svg);
+  background-color: #c9bb8a;
+}
+
+.icon.steel {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/38/Pok%C3%A9mon_Steel_Type_Icon.svg);
+  background-color: #5695a3;
+}
+
+.icon.water {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/0/0b/Pok%C3%A9mon_Water_Type_Icon.svg);
+  background-color: #539ddf;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  /* border-bottom: 1px dotted black; */
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  text-shadow: 1px 0 #000, -1px 0 #000, 0 1px #000, 0 -1px #000, 1px 1px #000,
+    -1px -1px #000, 1px -1px #000, -1px 1px #000;
+
+  /* Position the tooltip */
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}

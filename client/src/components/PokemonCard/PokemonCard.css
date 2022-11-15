@@ -1,33 +1,170 @@
-.basicCard {
+.card {
   display: flex;
   justify-content: center;
   width: 17rem;
   flex-wrap: wrap;
-  background-color: #222;
+  background-size: contain;
+  background-repeat: no-repeat;
   color: #ccc;
   margin: 1rem;
+  border-radius: 5px;
+  box-shadow: -5px 5px 3px #000;
+  background-color: #222;
+  border: 1px solid #000;
+  transition: 1s;
 }
 
-.basicCard img {
-  display: block;
-  width: 15rem;
-  background-color: rgb(0, 132, 255);
+.card:hover {
+  filter: grayscale(0%);
 }
+
+.card.bug:hover {
+  background-color: #aaff00;
+  box-shadow: 0 0 50px #aaff01;
+}
+
+.card.dark:hover {
+  background-color: #595761;
+  box-shadow: 0 0 50px #595761;
+}
+
+.card.dragon:hover {
+  background-color: #0c69c8;
+  box-shadow: 0 0 50px #0c69c8;
+}
+
+.card.electric:hover {
+  background-color: #f2d94e;
+  box-shadow: 0 0 50px #f2d94e;
+}
+
+.card.fire:hover {
+  background-color: #ff9800;
+  box-shadow: 0 0 50px #fd9800;
+}
+
+.card.fairy:hover {
+  background-color: #ee90e6;
+  box-shadow: 0 0 50px #ee90e6;
+}
+
+.card.fighting:hover {
+  background-color: #d3425f;
+  box-shadow: 0 0 50px #d3425f;
+}
+
+.card.flying:hover {
+  background-color: #98beff;
+  box-shadow: 0 0 50px #98beff;
+}
+
+.card.ghost:hover {
+  background-color: #5f6dbc;
+  box-shadow: 0 0 50px #5f6dbc;
+}
+
+.card.grass:hover {
+  background-color: #42e257;
+  box-shadow: 0 0 50px #42e257;
+}
+
+.card.ground:hover {
+  background-color: #da7c4d;
+  box-shadow: 0 0 50px #da7c4d;
+}
+
+.card.ice:hover {
+  background-color: #75d0c1;
+  box-shadow: 0 0 50px #75d0c1;
+}
+
+.card.normal:hover {
+  background-color: #a0a29f;
+  box-shadow: 0 0 50px #a0a29f;
+}
+
+.card.poison:hover {
+  background-color: #b763cf;
+  box-shadow: 0 0 50px #b763cf;
+}
+
+.card.psychic:hover {
+  background-color: #fa8581;
+  box-shadow: 0 0 50px #fa8581;
+}
+
+.card.rock:hover {
+  background-color: #c9bb8a;
+  box-shadow: 0 0 50px #c9bb8a;
+}
+
+.card.steel:hover {
+  background-color: #5695a3;
+  box-shadow: 0 0 50px #5695a3;
+}
+
+.card.water:hover {
+  background-color: #539ddf;
+  box-shadow: 0 0 50px #539ddf;
+}
+
+.card .name {
+  color: #fff;
+  text-shadow: 1px 0 #000, -1px 0 #000, 0 1px #000, 0 -1px #000, 1px 1px #000,
+    -1px -1px #000, 1px -1px #000, -1px 1px #000;
+  margin-top: 0.5rem;
+}
+
+.card img {
+  display: block;
+  position: sticky;
+  right: 0%;
+  width: 15rem;
+  filter: drop-shadow(-5px 5px 0px #000);
+  filter: saturate(200%);
+}
+
+.card img:hover {
+  transform: scale(1.1);
+}
+
 .name {
   text-transform: capitalize;
   font-size: 2rem;
   margin: 0;
 }
 
-.types {
+.pokemon-types {
   width: 100%;
   text-align: center;
 }
 
-.type {
-  display: inline-block;
-  background-color: rgb(119, 60, 168);
-  margin: 0.5rem;
-  padding: 0.5rem;
-  text-transform: capitalize;
+div.button-container {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+a.button {
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 5px 15px;
+  letter-spacing: 3px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #000;
+  background-color: #ccc;
+  border: none;
+  border-radius: 15px;
+  border: 1px solid #000;
+  box-shadow: 0 5px #000;
+}
+
+a.button:hover {
+  background-color: #fff;
+}
+
+a.button:active {
+  box-shadow: 0 1px #444;
+  transform: translateY(4px);
 }
