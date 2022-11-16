@@ -18,13 +18,15 @@
 }
 
 .navbar div img {
-  width: 30px;
-  height: 30px;
-  filter: saturate(200%) hue-rotate(35deg);
+  position: relative;
+  top: 2px;
+  width: 40px;
+  height: 40px;
+  filter: saturate(200%) contrast(200%);
 }
 
 .navbar div img:hover {
-  filter: saturate(200%) hue-rotate(35deg) drop-shadow(0 0 15px #fff);
+  filter: saturate(200%) contrast(200%) drop-shadow(0 0 15px #fff);
 }
 
 .navbar div a.navlink {

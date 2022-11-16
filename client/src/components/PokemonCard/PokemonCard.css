@@ -14,100 +14,6 @@
   transition: 1s;
 }
 
-.card:hover {
-  filter: grayscale(0%);
-}
-
-.card.bug:hover {
-  background-color: #aaff00;
-  box-shadow: 0 0 50px #aaff01;
-}
-
-.card.dark:hover {
-  background-color: #595761;
-  box-shadow: 0 0 50px #595761;
-}
-
-.card.dragon:hover {
-  background-color: #0c69c8;
-  box-shadow: 0 0 50px #0c69c8;
-}
-
-.card.electric:hover {
-  background-color: #f2d94e;
-  box-shadow: 0 0 50px #f2d94e;
-}
-
-.card.fire:hover {
-  background-color: #ff9800;
-  box-shadow: 0 0 50px #fd9800;
-}
-
-.card.fairy:hover {
-  background-color: #ee90e6;
-  box-shadow: 0 0 50px #ee90e6;
-}
-
-.card.fighting:hover {
-  background-color: #d3425f;
-  box-shadow: 0 0 50px #d3425f;
-}
-
-.card.flying:hover {
-  background-color: #98beff;
-  box-shadow: 0 0 50px #98beff;
-}
-
-.card.ghost:hover {
-  background-color: #5f6dbc;
-  box-shadow: 0 0 50px #5f6dbc;
-}
-
-.card.grass:hover {
-  background-color: #42e257;
-  box-shadow: 0 0 50px #42e257;
-}
-
-.card.ground:hover {
-  background-color: #da7c4d;
-  box-shadow: 0 0 50px #da7c4d;
-}
-
-.card.ice:hover {
-  background-color: #75d0c1;
-  box-shadow: 0 0 50px #75d0c1;
-}
-
-.card.normal:hover {
-  background-color: #a0a29f;
-  box-shadow: 0 0 50px #a0a29f;
-}
-
-.card.poison:hover {
-  background-color: #b763cf;
-  box-shadow: 0 0 50px #b763cf;
-}
-
-.card.psychic:hover {
-  background-color: #fa8581;
-  box-shadow: 0 0 50px #fa8581;
-}
-
-.card.rock:hover {
-  background-color: #c9bb8a;
-  box-shadow: 0 0 50px #c9bb8a;
-}
-
-.card.steel:hover {
-  background-color: #5695a3;
-  box-shadow: 0 0 50px #5695a3;
-}
-
-.card.water:hover {
-  background-color: #539ddf;
-  box-shadow: 0 0 50px #539ddf;
-}
-
 .card .name {
   color: #fff;
   text-shadow: 1px 0 #000, -1px 0 #000, 0 1px #000, 0 -1px #000, 1px 1px #000,
@@ -122,10 +28,6 @@
   width: 15rem;
   filter: drop-shadow(-5px 5px 0px #000);
   filter: saturate(200%);
-}
-
-.card img:hover {
-  transform: scale(1.1);
 }
 
 .name {

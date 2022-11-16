@@ -13,7 +13,7 @@ const Home = (props) => {
   const LastPokemon = currentPage * 12;
   const FirstPokemon = LastPokemon - 12;
   const currentPokemons = pokemons.slice(FirstPokemon, LastPokemon);
-
+  console.log(pokemons);
   const paginated = (page) => {
     setCurrentPage(page);
   };
@@ -66,7 +66,7 @@ const Home = (props) => {
             </div>
             <div className="pokemons">
               <Paginated
-                key="paginated"
+                key="paginated1"
                 array={pokemons}
                 paginated={paginated}
                 name="paginado1"
@@ -84,7 +84,7 @@ const Home = (props) => {
                 );
               })}
               <Paginated
-                key="paginated"
+                key="paginated2"
                 array={pokemons}
                 paginated={paginated}
                 name="paginado2"

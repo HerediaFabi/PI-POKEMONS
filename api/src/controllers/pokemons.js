@@ -37,8 +37,21 @@ const getAll = async () => {
 };
 
 const getPokemon = async (filter, value) => {
-  if (filter !== "id" || (filter === "id" && isNaN(value))) {
-    const dbPokemon = await Pokemon.findOne({ where: { [filter]: value } });
+  if (filter !== "id") {
+    const dbPokemon = await Pokemon.findOne({ where: { [filter]: value } }); //? Cambiar [filter] x name
+    if (dbPokemon) return dbPokemon;
+  }
+
+  if (isNaN(value)) {
+    const dbPokemon = await Pokemon.findByPk(value, {
+      include: {
+        model: Type,
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        },
+      },
+    });
     if (dbPokemon) return dbPokemon;
   }
 

@@ -1,14 +1,17 @@
+p {
+  margin: 0;
+}
+
 .detail {
   display: flex;
   margin-top: 60px;
-  background-color: blue;
   justify-content: center;
 }
 
 .detail-card {
   display: flex;
   justify-content: center;
-  width: 25rem;
+  width: 35rem;
   flex-wrap: wrap;
   background-size: contain;
   background-repeat: no-repeat;
@@ -19,34 +22,103 @@
   background-color: #222;
   border: 1px solid #000;
   transition: 1s;
+  padding: 15px;
+}
+
+.detail-name {
+  transition: 0.5s;
+  /* background-color: #0f0; */
+  padding: 5px 15px;
+  border-radius: 15px;
+  letter-spacing: 5px;
+  margin-top: 15px;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 35px;
+  font-weight: bold;
+  text-shadow: 1px 0 #000, -1px 0 #000, 0 1px #000, 0 -1px #000, 1px 1px #000,
+    -1px -1px #000, 1px -1px #000, -1px 1px #000;
 }
 
 .detail-card img {
   width: 20rem;
+  filter: saturate(200%);
 }
 
 .section-group {
-  background-color: blueviolet;
   margin-bottom: 5px;
   display: flex;
+  width: 100%;
 }
 
 .detail-section {
-  background-color: red;
+  /* background-color: red; */
   width: 100%;
   margin: 5px;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
-.detail-section div {
-  background-color: orangered;
-  border-radius: 50%;
+.detail-section div.icon {
+  margin: 5px;
   width: 5rem;
   height: 5rem;
 }
 
-.detail-section div img {
-  /* display: ; */
-  position: static;
+.detail-section .icon img {
+  position: relative;
   filter: invert(100%);
+  width: 3rem;
+  top: 1rem;
+  left: 1rem;
+}
+
+.detail-icon {
+  background-color: #333;
+}
+
+#pokemon-hp {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hp-bar {
+  margin-top: 5px;
+  width: 80%;
+  height: 7px;
+  background-color: #0f0;
+  border-radius: 15px;
+}
+
+#pokemon-id:hover {
+  background-color: #fd5555;
+  box-shadow: 0 0 50px #fd5555;
+}
+
+#pokemon-weight:hover {
+  background-color: #7270fd;
+  box-shadow: 0 0 50px #7270fd;
+}
+
+#pokemon-height:hover {
+  background-color: #faa92e;
+  box-shadow: 0 0 50px #faa92e;
+}
+
+#pokemon-attack:hover {
+  background-color: #c53dd1;
+  box-shadow: 0 0 50px #c53dd1;
+}
+
+#pokemon-defense:hover {
+  background-color: #55b343;
+  box-shadow: 0 0 50px #55b343;
+}
+
+#pokemon-speed:hover {
+  background-color: #37c4d6;
+  box-shadow: 0 0 50px #37c4d6;
 }

@@ -8,7 +8,7 @@ const Navbar = (props) => {
       <div className="leftLinks">
         <Link to="/">
           <img
-            src="https://cdn-icons-png.flaticon.com/512/743/743977.png"
+            src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/512/external-pikachu-video-games-those-icons-lineal-color-those-icons.png"
             alt=""
           />
         </Link>

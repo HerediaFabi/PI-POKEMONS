@@ -6,8 +6,13 @@ const pokemonRouter = Router();
 
 pokemonRouter.get("/", async (req, res) => {
   const { name } = req.query;
-  const result = name ? await getPokemon("name", name) : await getAll();
-  res.status(200).json(result);
+  try {
+    const result = name ? await getPokemon("name", name) : await getAll();
+    res.status(200).json(result);
+  } catch (error) {
+    const result = name ? "Name error" : "GET ALL error";
+    result.status(400).send(result);
+  }
 });
 
 pokemonRouter.get("/:id", async (req, res) => {
@@ -16,22 +21,18 @@ pokemonRouter.get("/:id", async (req, res) => {
 });
 
 pokemonRouter.post("/", async (req, res) => {
-  const { name, hp, attack, defense, speed, height, weight, types } = req.body;
-  const data = { name, hp, attack, defense, speed, height, weight };
-  let newPokemon = await Pokemon.create(data);
+  try {
+    const { name, hp, attack, defense, speed, height, weight, image, types } =
+      req.body;
+    const data = { name, hp, attack, defense, speed, height, weight, image };
+    let newPokemon = await Pokemon.create(data);
 
-  // let typesToAdd = [];
-  // types.map(async (t) => {
-  //   typesToAdd = await Type.findAll({
-  //     where: { name: t },
-  //   });
-  // });
+    types ? newPokemon.addTypes(types) : newPokemon.addTypes(19);
 
-  console.log(types);
-  // console.log(typesToAdd);
-  newPokemon.addTypes(types);
-
-  res.status(200).json(newPokemon);
+    res.status(200).send(`Pokemon ${name} successfully created!`);
+  } catch (error) {
+    res.status(400).send("Something went wrong");
+  }
 });
 
 module.exports = pokemonRouter;

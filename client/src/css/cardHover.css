@@ -1,0 +1,99 @@
+.bug:hover {
+  background-color: #aaff00;
+  box-shadow: 0 0 50px #aaff01;
+}
+
+.dark:hover {
+  background-color: #595761;
+  box-shadow: 0 0 50px #595761;
+}
+
+.dragon:hover {
+  background-color: #0c69c8;
+  box-shadow: 0 0 50px #0c69c8;
+}
+
+.electric:hover {
+  background-color: #f2d94e;
+  box-shadow: 0 0 50px #f2d94e;
+}
+
+.fire:hover {
+  background-color: #ff9800;
+  box-shadow: 0 0 50px #fd9800;
+}
+
+.fairy:hover {
+  background-color: #ee90e6;
+  box-shadow: 0 0 50px #ee90e6;
+}
+
+.fighting:hover {
+  background-color: #d3425f;
+  box-shadow: 0 0 50px #d3425f;
+}
+
+.flying:hover {
+  background-color: #98beff;
+  box-shadow: 0 0 50px #98beff;
+}
+
+.ghost:hover {
+  background-color: #5f6dbc;
+  box-shadow: 0 0 50px #5f6dbc;
+}
+
+.grass:hover {
+  background-color: #42e257;
+  box-shadow: 0 0 50px #42e257;
+}
+
+.ground:hover {
+  background-color: #da7c4d;
+  box-shadow: 0 0 50px #da7c4d;
+}
+
+.ice:hover {
+  background-color: #75d0c1;
+  box-shadow: 0 0 50px #75d0c1;
+}
+
+.normal:hover {
+  background-color: #a0a29f;
+  box-shadow: 0 0 50px #a0a29f;
+}
+
+.poison:hover {
+  background-color: #b763cf;
+  box-shadow: 0 0 50px #b763cf;
+}
+
+.psychic:hover {
+  background-color: #fa8581;
+  box-shadow: 0 0 50px #fa8581;
+}
+
+.rock:hover {
+  background-color: #c9bb8a;
+  box-shadow: 0 0 50px #c9bb8a;
+}
+
+.shadow:hover {
+  background-color: #000;
+  box-shadow: 0 0 50px #000;
+}
+
+.steel:hover {
+  background-color: #5695a3;
+  box-shadow: 0 0 50px #5695a3;
+}
+
+.unknown:hover {
+  background-color: #25b7d3;
+  box-shadow: 0 0 50px #25b7d3;
+}
+
+.water:hover {
+  background-color: #539ddf;
+  box-shadow: 0 0 50px #539ddf;
+}

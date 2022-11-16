@@ -107,6 +107,18 @@ div .icon {
   background-color: #5695a3;
 }
 
+.icon.shadow {
+  background-image: url(https://cdn-icons-png.flaticon.com/512/828/828726.png);
+  background-size: 120%;
+  background-position: center;
+  background-color: #fff;
+}
+
+.icon.unknown {
+  background-image: url(https://img.icons8.com/flat-round/512/question-mark.png);
+  background-color: #25b7d3;
+}
+
 .icon.water {
   background-image: url(https://upload.wikimedia.org/wikipedia/commons/0/0b/Pok%C3%A9mon_Water_Type_Icon.svg);
   background-color: #539ddf;
@@ -115,7 +127,6 @@ div .icon {
 .tooltip {
   position: relative;
   display: inline-block;
-  /* border-bottom: 1px dotted black; */
 }
 
 .tooltip .tooltiptext {
