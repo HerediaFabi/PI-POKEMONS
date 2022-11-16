@@ -36,14 +36,9 @@ const getAll = async () => {
   return [...pokemons, ...dbPokemons]; //! Por qué una copia?
 };
 
-const getPokemon = async (filter, value) => {
-  if (filter !== "id") {
-    const dbPokemon = await Pokemon.findOne({ where: { [filter]: value } }); //? Cambiar [filter] x name
-    if (dbPokemon) return dbPokemon;
-  }
-
-  if (isNaN(value)) {
-    const dbPokemon = await Pokemon.findByPk(value, {
+const getPokemonById = async (id) => {
+  if (isNaN(id)) {
+    const dbPokemon = await Pokemon.findByPk(id, {
       include: {
         model: Type,
         attributes: ["name"],
@@ -55,39 +50,46 @@ const getPokemon = async (filter, value) => {
     if (dbPokemon) return dbPokemon;
   }
 
+  const apiPokemon = await axios.get("https://pokeapi.co/api/v2/pokemon/" + id);
+
+  const pokemon = {
+    id: apiPokemon.data.id,
+    name: apiPokemon.data.name,
+    image: apiPokemon.data.sprites.other["official-artwork"].front_default,
+    hp: apiPokemon.data.stats.find((el) => el.stat.name === "hp").base_stat,
+    attack: apiPokemon.data.stats.find((el) => el.stat.name === "attack")
+      .base_stat,
+    defense: apiPokemon.data.stats.find((el) => el.stat.name === "defense")
+      .base_stat,
+    speed: apiPokemon.data.stats.find((el) => el.stat.name === "speed")
+      .base_stat,
+    height: apiPokemon.data.height,
+    weight: apiPokemon.data.weight,
+    types: apiPokemon.data.types.map((el) => el.type.name),
+  };
+
+  return pokemon;
+};
+
+const getPokemonByName = async (name) => {
+  const dbPokemon = await Pokemon.findOne({ where: { name: name } });
+  if (dbPokemon) return dbPokemon;
+
   const apiPokemon = await axios.get(
-    "https://pokeapi.co/api/v2/pokemon/" + value
+    "https://pokeapi.co/api/v2/pokemon/" + name
   );
 
-  let pokemon = {};
+  const pokemon = {
+    name: apiPokemon.data.name,
+    image: apiPokemon.data.sprites.other["official-artwork"].front_default,
+    types: apiPokemon.data.types.map((el) => el.type.name),
+  };
 
-  if (filter === "id") {
-    pokemon = {
-      id: apiPokemon.data.id,
-      name: apiPokemon.data.name,
-      image: apiPokemon.data.sprites.other["official-artwork"].front_default,
-      hp: apiPokemon.data.stats.find((el) => el.stat.name === "hp").base_stat,
-      attack: apiPokemon.data.stats.find((el) => el.stat.name === "attack")
-        .base_stat,
-      defense: apiPokemon.data.stats.find((el) => el.stat.name === "defense")
-        .base_stat,
-      speed: apiPokemon.data.stats.find((el) => el.stat.name === "speed")
-        .base_stat,
-      height: apiPokemon.data.height,
-      weight: apiPokemon.data.weight,
-      types: apiPokemon.data.types.map((el) => el.type.name),
-    };
-  } else {
-    pokemon = {
-      name: apiPokemon.data.name,
-      image: apiPokemon.data.sprites.other["official-artwork"].front_default,
-      types: apiPokemon.data.types.map((el) => el.type.name),
-    };
-  } //*Else en caso de error
   return pokemon;
 };
 
 module.exports = {
   getAll,
-  getPokemon,
+  getPokemonById,
+  getPokemonByName,
 };

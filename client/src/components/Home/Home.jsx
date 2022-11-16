@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemons } from "../../redux/actions";
+import { getPokemons, getPokemonByName } from "../../redux/actions";
 import PokemonCard from "../PokemonCard/PokemonCard";
 import Paginated from "../Paginated/Paginated";
 import Navbar from "../Navbar/Navbar";
@@ -10,28 +10,39 @@ const Home = (props) => {
   const dispatch = useDispatch();
   const pokemons = useSelector((state) => state.allPokemons);
   const [currentPage, setCurrentPage] = useState(1);
+  const [name, setName] = useState("");
   const LastPokemon = currentPage * 12;
   const FirstPokemon = LastPokemon - 12;
-  const currentPokemons = pokemons.slice(FirstPokemon, LastPokemon);
+  const [filteredPokemons, setFilteredPokemons] = useState([...pokemons]);
+  const currentPokemons = filteredPokemons.slice(FirstPokemon, LastPokemon);
   console.log(pokemons);
+
   const paginated = (page) => {
     setCurrentPage(page);
   };
 
-  // useEffect(() => {
-  //   dispatch(getPokemons());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getPokemons());
+  }, [dispatch]);
+
+  const changeHandler = (event) => {};
+
+  const clickHandler = (event) => {};
 
   return (
     <>
       <Navbar />
       <div className="home">
-        {pokemons.length ? (
+        {filteredPokemons.length ? (
           <div className="container">
             <div className="filters">
               <div id="pkmByName">
-                <input type="text" placeholder="Search by name" />
-                <button>Search</button>
+                <input
+                  onChange={(e) => changeHandler(e)}
+                  type="text"
+                  placeholder="Search by name"
+                />
+                <button onClick={(e) => clickHandler(e)}>Search</button>
               </div>
               <div id="pkmByOrigin">
                 <select name="" id="">

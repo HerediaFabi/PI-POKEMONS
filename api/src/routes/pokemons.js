@@ -1,23 +1,31 @@
 const { Router } = require("express");
-const { getAll, getPokemon } = require("../controllers/pokemons");
-const { Pokemon, Type } = require("../db");
+const {
+  getAll,
+  getPokemonById,
+  getPokemonByName,
+} = require("../controllers/pokemons");
+const { Pokemon } = require("../db");
 
 const pokemonRouter = Router();
 
 pokemonRouter.get("/", async (req, res) => {
   const { name } = req.query;
   try {
-    const result = name ? await getPokemon("name", name) : await getAll();
+    const result = name ? await getPokemonByName(name) : await getAll();
     res.status(200).json(result);
   } catch (error) {
-    const result = name ? "Name error" : "GET ALL error";
-    result.status(400).send(result);
+    const result = name ? "Name error " + error.message : "GET ALL error";
+    res.status(400).send(result);
   }
 });
 
 pokemonRouter.get("/:id", async (req, res) => {
-  const result = await getPokemon("id", req.params.id);
-  res.status(200).json(result);
+  try {
+    const result = await getPokemonById(req.params.id);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
 });
 
 pokemonRouter.post("/", async (req, res) => {
