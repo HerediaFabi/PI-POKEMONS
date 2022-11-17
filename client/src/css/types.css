@@ -114,6 +114,10 @@ div .icon {
   background-color: #fff;
 }
 
+.icon.shadow:hover {
+  background-color: #fff;
+}
+
 .icon.unknown {
   background-image: url(https://img.icons8.com/flat-round/512/question-mark.png);
   background-color: #25b7d3;

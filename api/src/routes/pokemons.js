@@ -32,9 +32,8 @@ pokemonRouter.get("/:id", async (req, res) => {
 pokemonRouter.post("/", async (req, res) => {
   try {
     createPokemon(req.body);
-    res
-      .status(200)
-      .send(`Pokemon ${req.body.name.toUpperCase()} successfully created!`);
+    console.log("Holis");
+    res.status(200).send(`Pokemon successfully created!`);
   } catch (error) {
     res.status(400).send("Something went wrong");
   }

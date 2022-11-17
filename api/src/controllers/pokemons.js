@@ -18,6 +18,7 @@ const getAll = async () => {
         id: element.id,
         name: element.name,
         image: element.sprites.other["official-artwork"].front_default,
+        attack: element.stats.find((el) => el.stat.name === "attack").base_stat,
         types: element.types.map((element) => element.type.name),
       };
     });

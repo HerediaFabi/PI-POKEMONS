@@ -20,3 +20,6 @@ let ordenado = array.sort((a, b) => {
 });
 
 console.log(ordenado);
+
+let text = "max_attack";
+console.log(text.slice(4));

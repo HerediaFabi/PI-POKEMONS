@@ -10,6 +10,8 @@ import {
   CLEAN_DETAIL,
   RECHARGE_ALL_POKEMONS,
   INDISTINCT_ORDER,
+  MAX_ATTACK,
+  MIN_ATTACK,
   // RECHARGE_FILTERED_POKEMONS,
 } from "../actions/index";
 
@@ -19,6 +21,8 @@ import {
   apiPokemons,
   dbPokemons,
   indistinctOrder,
+  attackMax,
+  attackMin,
 } from "./helpers";
 
 const initialState = {
@@ -82,6 +86,18 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         filteredPokemons: alphabeticDesc(state.filteredPokemons),
+      };
+
+    case MAX_ATTACK:
+      return {
+        ...state,
+        filteredPokemons: attackMax(state.filteredPokemons),
+      };
+
+    case MIN_ATTACK:
+      return {
+        ...state,
+        filteredPokemons: attackMin(state.filteredPokemons),
       };
 
     case INDISTINCT_ORDER:

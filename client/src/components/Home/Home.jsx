@@ -6,6 +6,7 @@ import {
   alphabeticOrder,
   originFilter,
   rechargeAllPokemons,
+  statsOrder,
 } from "../../redux/actions/index";
 import PokemonCard from "../PokemonCard/PokemonCard";
 import Paginated from "../Paginated/Paginated";
@@ -56,10 +57,11 @@ const Home = (props) => {
       case "origin_filter":
         ordenar(event.target.name, event.target.value);
         dispatch(originFilter(event.target.value));
-        console.log(inputs);
         break;
 
       case "stat_order":
+        ordenar(event.target.name, event.target.value);
+        dispatch(statsOrder(event.target.value));
         break;
 
       default:
@@ -69,7 +71,6 @@ const Home = (props) => {
 
   const clickHandler = async (event) => {
     if (inputs.name) {
-      // console.log(await dispatch(getPokemonByName(inputs.name)));
       await dispatch(getPokemonByName(inputs.name));
       setInputs({ ...inputs, ["name"]: "" });
     } else {

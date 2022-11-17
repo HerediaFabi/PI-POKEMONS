@@ -1,3 +1,11 @@
+export const dbPokemons = (array) => {
+  return array.filter((pokemon) => pokemon.hasOwnProperty("createdAt"));
+};
+
+export const apiPokemons = (array) => {
+  return array.filter((pokemon) => !pokemon.hasOwnProperty("createdAt"));
+};
+
 export const alphabeticAsc = (array) =>
   array.sort((a, b) => {
     if (a.name > b.name) return 1;
@@ -20,10 +28,16 @@ export const indistinctOrder = (array) =>
     return a.id - b.id;
   });
 
-export const dbPokemons = (array) => {
-  return array.filter((pokemon) => pokemon.hasOwnProperty("createdAt"));
+export const attackMin = (array) => {
+  console.log(array);
+  return array.sort((a, b) => {
+    return a.attack - b.attack;
+  });
 };
 
-export const apiPokemons = (array) => {
-  return array.filter((pokemon) => !pokemon.hasOwnProperty("createdAt"));
-};
+export const attackMax = (array) =>
+  array
+    .sort((a, b) => {
+      return a.attack - b.attack;
+    })
+    .reverse();

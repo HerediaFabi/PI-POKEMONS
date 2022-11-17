@@ -8,9 +8,11 @@ export const GET_POKEMON_BY_NAME = "GET_POKEMON_BY_NAME";
 export const GET_TYPES = "GET_TYPES";
 export const A_Z = "A_Z";
 export const Z_A = "Z_A";
+export const MAX_ATTACK = "MAX_ATTACK";
+export const MIN_ATTACK = "MIX_ATTACK";
+export const INDISTINCT_ORDER = "INDISTINCT_ORDER";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const RECHARGE_ALL_POKEMONS = "RECHARGE_ALL_POKEMONS";
-export const INDISTINCT_ORDER = "INDISTINCT_ORDER";
 
 export const getPokemons = () => {
   return async function (dispatch) {
@@ -86,6 +88,24 @@ export const alphabeticOrder = (value) => {
 
       case "z_a":
         dispatch({ type: Z_A });
+        break;
+
+      default:
+        dispatch({ type: INDISTINCT_ORDER });
+        break;
+    }
+  };
+};
+
+export const statsOrder = (value) => {
+  return function (dispatch) {
+    switch (value) {
+      case "max_attack":
+        dispatch({ type: MAX_ATTACK, payload: value.slice(4) });
+        break;
+
+      case "min_attack":
+        dispatch({ type: MIN_ATTACK, payload: value.slice(4) });
         break;
 
       default:
