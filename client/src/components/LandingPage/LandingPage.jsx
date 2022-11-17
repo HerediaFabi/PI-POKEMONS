@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getPokemons } from "../../redux/actions";
+import { getPokemons } from "../../redux/actions/index";
 import "./LandingPage.css";
 import { Link } from "react-router-dom";
 

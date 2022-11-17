@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemons, getPokemonByName } from "../../redux/actions";
+import { getPokemons, getPokemonByName } from "../../redux/actions/index";
 import PokemonCard from "../PokemonCard/PokemonCard";
 import Paginated from "../Paginated/Paginated";
 import Navbar from "../Navbar/Navbar";
@@ -10,24 +10,43 @@ const Home = (props) => {
   const dispatch = useDispatch();
   const pokemons = useSelector((state) => state.allPokemons);
   const [currentPage, setCurrentPage] = useState(1);
-  const [name, setName] = useState("");
+  const [inputs, setInputs] = useState({});
   const LastPokemon = currentPage * 12;
   const FirstPokemon = LastPokemon - 12;
-  const [filteredPokemons, setFilteredPokemons] = useState([...pokemons]);
+  const filteredPokemons = useSelector((state) => state.filteredPokemons);
   const currentPokemons = filteredPokemons.slice(FirstPokemon, LastPokemon);
-  console.log(pokemons);
 
   const paginated = (page) => {
     setCurrentPage(page);
   };
 
   useEffect(() => {
-    dispatch(getPokemons());
+    if (!pokemons.length) dispatch(getPokemons());
   }, [dispatch]);
 
-  const changeHandler = (event) => {};
+  const changeHandler = (event) => {
+    const property = event.target.name;
+    const value = event.target.value;
 
-  const clickHandler = (event) => {};
+    switch (event.target.name) {
+      case "name":
+        setInputs({ ...inputs, [property]: value });
+        console.log(inputs["name"]);
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const clickHandler = async (event) => {
+    if (inputs.name) {
+      // console.log(await dispatch(getPokemonByName(inputs.name)));
+      await dispatch(getPokemonByName(inputs.name));
+    } else {
+      alert("Name empty");
+    }
+  };
 
   return (
     <>
@@ -41,34 +60,33 @@ const Home = (props) => {
                   onChange={(e) => changeHandler(e)}
                   type="text"
                   placeholder="Search by name"
+                  name="name"
                 />
                 <button onClick={(e) => clickHandler(e)}>Search</button>
               </div>
               <div id="pkmByOrigin">
                 <select name="" id="">
-                  <option disabled value="">
-                    Select origin
-                  </option>
+                  <option hidden label="Select origin" value="-1"></option>
                   <option value="all">All pokemons</option>
                   <option value="api">API pokemons</option>
                   <option value="db">Database pokemons</option>
                 </select>
               </div>
               <div id="alphabeticOrder">
-                <select name="" id="">
-                  <option value="" disabled>
-                    Select order
-                  </option>
+                <select
+                  onChange={(e) => changeHandler(e)}
+                  name="alphabeticOrder"
+                  id=""
+                >
+                  <option hidden label="Select order" value="-1"></option>
                   <option value="indistinct">Indistinct</option>
-                  <option value="a_z">A-Z</option>
-                  <option value="z_a">Z-A</option>
+                  <option value="alphabeticAsc">A-Z</option>
+                  <option value="alphabeticDesc">Z-A</option>
                 </select>
               </div>
               <div id="attackOrder">
                 <select name="" id="">
-                  <option value="" disabled>
-                    Select stat
-                  </option>
+                  <option hidden label="Select stat" value="-1"></option>
                   <option value="indistinct">Indistinct</option>
                   <option value="max_attack">Max attack</option>
                   <option value="min_attack">Min attack</option>
@@ -78,7 +96,7 @@ const Home = (props) => {
             <div className="pokemons">
               <Paginated
                 key="paginated1"
-                array={pokemons}
+                array={filteredPokemons}
                 paginated={paginated}
                 name="paginado1"
                 currentPage={currentPage}
@@ -96,7 +114,7 @@ const Home = (props) => {
               })}
               <Paginated
                 key="paginated2"
-                array={pokemons}
+                array={filteredPokemons}
                 paginated={paginated}
                 name="paginado2"
                 currentPage={currentPage}

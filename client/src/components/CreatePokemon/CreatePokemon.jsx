@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getTypes, postPokemon } from "../../redux/actions";
+import { getTypes, postPokemon } from "../../redux/actions/index";
 import "./CreatePokemon.css";
 import Navbar from "../Navbar/Navbar";
 

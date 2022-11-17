@@ -5,12 +5,6 @@ import "../../css/cardHover.css";
 import { Link } from "react-router-dom";
 
 const PokemonCard = (props) => {
-  console.log(props.types[0]);
-
-  const resultado = props.types[0].hasOwnProperty("name")
-    ? props.types[0].name
-    : props.types[0];
-
   return (
     <div
       className={`card 
@@ -37,7 +31,7 @@ const PokemonCard = (props) => {
         })}
       </div>
       <div className="button-container">
-        <Link to={`/pokemons/${props.id}`} target="_blank" className="button">
+        <Link to={`/pokemons/${props.id}`} className="button">
           <span>Ver detalle</span>
         </Link>
       </div>

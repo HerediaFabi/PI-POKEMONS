@@ -2,7 +2,7 @@ import React from "react";
 import "./PokemonDetail.css";
 import "../../css/types.css";
 import "../../css/cardHover.css";
-import { getPokemonById } from "../../redux/actions";
+import { getPokemonById, cleanDetail } from "../../redux/actions/index";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../Navbar/Navbar";
@@ -16,6 +16,9 @@ const PokemonDetail = (props) => {
 
   useEffect(() => {
     dispatch(getPokemonById(props.match.params.id));
+    return () => {
+      dispatch(cleanDetail());
+    };
   }, [dispatch]);
 
   const pokemon = useSelector((state) => state.pokemonDetail);
