@@ -5,6 +5,7 @@ import "../../css/cardHover.css";
 import { Link } from "react-router-dom";
 
 const PokemonCard = (props) => {
+  console.log(props);
   return (
     <div
       className={`card 

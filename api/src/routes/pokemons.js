@@ -3,6 +3,7 @@ const {
   getAll,
   getPokemonById,
   getPokemonByName,
+  createPokemon,
 } = require("../controllers/pokemons");
 const { Pokemon } = require("../db");
 
@@ -30,14 +31,10 @@ pokemonRouter.get("/:id", async (req, res) => {
 
 pokemonRouter.post("/", async (req, res) => {
   try {
-    const { name, hp, attack, defense, speed, height, weight, image, types } =
-      req.body;
-    const data = { name, hp, attack, defense, speed, height, weight, image };
-    let newPokemon = await Pokemon.create(data);
-
-    types ? newPokemon.addTypes(types) : newPokemon.addTypes(19);
-
-    res.status(200).send(`Pokemon ${name} successfully created!`);
+    createPokemon(req.body);
+    res
+      .status(200)
+      .send(`Pokemon ${req.body.name.toUpperCase()} successfully created!`);
   } catch (error) {
     res.status(400).send("Something went wrong");
   }

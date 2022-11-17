@@ -6,27 +6,12 @@ const getAll = async () => {
     const info = await axios.get("https://pokeapi.co/api/v2/pokemon");
     const info2 = await axios.get(info.data.next);
 
-    const dbPokemons = await Pokemon.findAll({
-      include: {
-        model: Type,
-        attributes: ["name"],
-        through: {
-          attributes: [],
-        },
-      },
-    });
-
     const mergeResults = [...info.data.results, ...info2.data.results]; //? TRAER 40 POKEMONES
-
-    // let pokemons = [];
-    // console.log(pokemons);
 
     const arrayPromise = await info.data.results.map(async (element) => {
       return await axios.get(element.url); //!whats
     });
-    console.log(arrayPromise);
     const promiseData = await Promise.all(arrayPromise);
-    console.log(promiseData);
     const pokeInfo = promiseData?.map((element) => element.data);
     const pokemons = pokeInfo?.map((element) => {
       return {
@@ -37,19 +22,31 @@ const getAll = async () => {
       };
     });
 
+    const dbPokemons = await Pokemon.findAll({
+      include: {
+        model: Type,
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        },
+      },
+    });
+    // let pokemons = [];
+
     // for (let i = 0; i < 5; i++) {
-    // let promises = await axios.get(mergeResults[i].url);
-    // let types = [];
-    // for (const type of infoPokemon.data.types) {
-    //     types.push(type["type"].name);
-    //   }
-    //   pokemons.push({
-    //       id: infoPokemon.data.id,
-    //       name: infoPokemon.data.name,
-    //       image: infoPokemon.data.sprites.other["official-artwork"].front_default,
-    //       types,
-    //     });
-    //     console.log(pokemons.length);
+    //   // let infoPokemon = await axios.get(urls[i]);
+    //   // console.log(infoPokemon);
+    //   // let types = [];
+    //   // for (const type of infoPokemon.data.types) {
+    //   //   console.log(type["type"].name);
+    //   // }
+    //   // console.log({
+    //   //   id: infoPokemon.data.id,
+    //   //   name: infoPokemon.data.name,
+    //   //   image: infoPokemon.data.sprites.other["official-artwork"].front_default,
+    //   //   types,
+    //   // });
+    //   // console.log(pokemons.length);
     // }
     return [...pokemons, ...dbPokemons];
   } catch (error) {
@@ -93,9 +90,10 @@ const getPokemonById = async (id) => {
 };
 
 const getPokemonByName = async (name) => {
+  name = name.toLowerCase();
   const dbPokemons = await Pokemon.findAll();
   const coincidence = await dbPokemons.find(
-    (pokemon) => pokemon.name.toLowerCase() === name.toLowerCase()
+    (pokemon) => pokemon.name.toLowerCase() === name
   );
 
   let dbPokemon;
@@ -113,8 +111,6 @@ const getPokemonByName = async (name) => {
     return [dbPokemon];
   }
 
-  // return {id: coincidence.dataValues.id, name: coincidence.dataValues.name, image: coincidence.dataValues.image, types:};
-
   const apiPokemon = await axios.get(
     "https://pokeapi.co/api/v2/pokemon/" + name
   );
@@ -131,8 +127,27 @@ const getPokemonByName = async (name) => {
   return [pokemon];
 };
 
+const createPokemon = async (body) => {
+  const { name, hp, attack, defense, speed, height, weight, image, types } =
+    body;
+  const data = {
+    name,
+    hp,
+    attack,
+    defense,
+    speed,
+    height,
+    weight,
+    image,
+  };
+  let newPokemon = await Pokemon.create(data);
+
+  types ? newPokemon.addTypes(types) : newPokemon.addTypes(19);
+};
+
 module.exports = {
   getAll,
   getPokemonById,
   getPokemonByName,
+  createPokemon,
 };

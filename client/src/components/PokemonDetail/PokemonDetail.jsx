@@ -9,6 +9,7 @@ import Navbar from "../Navbar/Navbar";
 
 const PokemonDetail = (props) => {
   const dispatch = useDispatch();
+  console.log(props);
 
   const capitalize = (string) => {
     return string.charAt(0).toUpperCase().concat(string.slice(1));

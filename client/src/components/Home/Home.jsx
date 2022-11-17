@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemons, getPokemonByName } from "../../redux/actions/index";
+import {
+  getPokemons,
+  getPokemonByName,
+  alphabeticOrder,
+  originFilter,
+  rechargeAllPokemons,
+} from "../../redux/actions/index";
 import PokemonCard from "../PokemonCard/PokemonCard";
 import Paginated from "../Paginated/Paginated";
 import Navbar from "../Navbar/Navbar";
@@ -24,14 +30,36 @@ const Home = (props) => {
     if (!pokemons.length) dispatch(getPokemons());
   }, [dispatch]);
 
-  const changeHandler = (event) => {
+  const recharge = () => {
+    dispatch(getPokemons());
+  };
+
+  const ordenar = (name, value) => {
+    setInputs({ ...inputs, [name]: value });
+  };
+
+  const changeHandler = async (event) => {
     const property = event.target.name;
     const value = event.target.value;
 
     switch (event.target.name) {
       case "name":
         setInputs({ ...inputs, [property]: value });
-        console.log(inputs["name"]);
+        console.log(inputs);
+        break;
+
+      case "alphabetic_order":
+        ordenar(event.target.name, event.target.value);
+        dispatch(alphabeticOrder(event.target.value));
+        break;
+
+      case "origin_filter":
+        ordenar(event.target.name, event.target.value);
+        dispatch(originFilter(event.target.value));
+        console.log(inputs);
+        break;
+
+      case "stat_order":
         break;
 
       default:
@@ -43,6 +71,7 @@ const Home = (props) => {
     if (inputs.name) {
       // console.log(await dispatch(getPokemonByName(inputs.name)));
       await dispatch(getPokemonByName(inputs.name));
+      setInputs({ ...inputs, ["name"]: "" });
     } else {
       alert("Name empty");
     }
@@ -55,17 +84,25 @@ const Home = (props) => {
         {filteredPokemons.length ? (
           <div className="container">
             <div className="filters">
+              <div>
+                <button onClick={() => recharge()}>Recharge</button>
+              </div>
               <div id="pkmByName">
                 <input
                   onChange={(e) => changeHandler(e)}
                   type="text"
                   placeholder="Search by name"
                   name="name"
+                  value={inputs.name}
                 />
                 <button onClick={(e) => clickHandler(e)}>Search</button>
               </div>
               <div id="pkmByOrigin">
-                <select name="" id="">
+                <select
+                  name="origin_filter"
+                  id=""
+                  onChange={(e) => changeHandler(e)}
+                >
                   <option hidden label="Select origin" value="-1"></option>
                   <option value="all">All pokemons</option>
                   <option value="api">API pokemons</option>
@@ -75,17 +112,21 @@ const Home = (props) => {
               <div id="alphabeticOrder">
                 <select
                   onChange={(e) => changeHandler(e)}
-                  name="alphabeticOrder"
-                  id=""
+                  name="alphabetic_order"
+                  value={inputs.alphabetic_order}
                 >
                   <option hidden label="Select order" value="-1"></option>
                   <option value="indistinct">Indistinct</option>
-                  <option value="alphabeticAsc">A-Z</option>
-                  <option value="alphabeticDesc">Z-A</option>
+                  <option value="a_z">A-Z</option>
+                  <option value="z_a">Z-A</option>
                 </select>
               </div>
               <div id="attackOrder">
-                <select name="" id="">
+                <select
+                  name="stat_order"
+                  id=""
+                  onChange={(e) => changeHandler(e)}
+                >
                   <option hidden label="Select stat" value="-1"></option>
                   <option value="indistinct">Indistinct</option>
                   <option value="max_attack">Max attack</option>

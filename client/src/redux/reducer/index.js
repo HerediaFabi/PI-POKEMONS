@@ -5,16 +5,26 @@ import {
   GET_POKEMON_BY_ID,
   GET_POKEMON_BY_NAME,
   GET_TYPES,
-  ALPHABETIC_ASC,
-  ALPHABETIC_DESC,
+  A_Z,
+  Z_A,
   CLEAN_DETAIL,
+  RECHARGE_ALL_POKEMONS,
+  INDISTINCT_ORDER,
+  // RECHARGE_FILTERED_POKEMONS,
 } from "../actions/index";
 
-import { alphabeticAsc, alphabeticDesc } from "./helpers";
+import {
+  alphabeticAsc,
+  alphabeticDesc,
+  apiPokemons,
+  dbPokemons,
+  indistinctOrder,
+} from "./helpers";
 
 const initialState = {
   allPokemons: [],
   filteredPokemons: [],
+  noOrder: [],
   pokemonDetail: {},
   types: [],
 };
@@ -25,6 +35,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allPokemons: action.payload,
+        noOrder: action.payload,
         filteredPokemons: action.payload,
       };
 
@@ -41,16 +52,43 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, pokemonDetail: [] };
 
     case GET_DB_POKEMONS:
-      return { ...state, filteredPokemons: [] };
+      return {
+        ...state,
+        noOrder: dbPokemons(state.allPokemons),
+        filteredPokemons: dbPokemons(state.allPokemons),
+      };
 
     case GET_API_POKEMONS:
-      return { ...state, filteredPokemons: [] };
+      return {
+        ...state,
+        noOrder: apiPokemons(state.allPokemons),
+        filteredPokemons: apiPokemons(state.allPokemons),
+      };
 
-    case ALPHABETIC_ASC:
-      return { ...state, filteredPokemons: alphabeticAsc(state.allPokemons) };
+    case RECHARGE_ALL_POKEMONS:
+      return {
+        ...state,
+        noOrder: state.allPokemons,
+        filteredPokemons: state.allPokemons,
+      };
 
-    case ALPHABETIC_DESC:
-      return { ...state, filteredPokemons: alphabeticDesc(state.allPokemons) };
+    case A_Z:
+      return {
+        ...state,
+        filteredPokemons: alphabeticAsc(state.filteredPokemons),
+      };
+
+    case Z_A:
+      return {
+        ...state,
+        filteredPokemons: alphabeticDesc(state.filteredPokemons),
+      };
+
+    case INDISTINCT_ORDER:
+      return {
+        ...state,
+        filteredPokemons: indistinctOrder(state.filteredPokemons),
+      };
 
     default:
       return { ...state };

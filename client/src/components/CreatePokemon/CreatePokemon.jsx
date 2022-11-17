@@ -34,6 +34,8 @@ const CreatePokemon = (props) => {
           [property]: [...inputs[property], value],
         });
       }
+    } else if (property === "name") {
+      setInputs({ ...inputs, [property]: value.toLowerCase() });
     } else {
       setInputs({ ...inputs, [property]: value });
     }

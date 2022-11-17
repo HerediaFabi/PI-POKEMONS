@@ -6,9 +6,11 @@ export const GET_API_POKEMONS = "GET_API_POKEMONS";
 export const GET_POKEMON_BY_ID = "GET_POKEMON_BY_ID";
 export const GET_POKEMON_BY_NAME = "GET_POKEMON_BY_NAME";
 export const GET_TYPES = "GET_TYPES";
-export const ALPHABETIC_ASC = "ALPHABETIC_ASC";
-export const ALPHABETIC_DESC = "ALPHABETIC_DESC";
+export const A_Z = "A_Z";
+export const Z_A = "Z_A";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
+export const RECHARGE_ALL_POKEMONS = "RECHARGE_ALL_POKEMONS";
+export const INDISTINCT_ORDER = "INDISTINCT_ORDER";
 
 export const getPokemons = () => {
   return async function (dispatch) {
@@ -45,37 +47,52 @@ export const postPokemon = (data) => {
   };
 };
 
+export const rechargeAllPokemons = () => {
+  return function (dispatch) {
+    dispatch({ type: RECHARGE_ALL_POKEMONS });
+  };
+};
+
 export const cleanDetail = () => {
   return function (dispatch) {
     dispatch({ type: CLEAN_DETAIL });
   };
 };
 
-export const getDbPokemons = () => {
-  return function (dispatch) {
-    dispatch({ type: GET_DB_POKEMONS });
-  };
-};
-
-export const getAPIPokemons = () => {
-  return function (dispatch) {
-    dispatch({ type: GET_API_POKEMONS });
-  };
-};
-
-export const orderPokemons = (value) => {
+export const originFilter = (value) => {
   return function (dispatch) {
     switch (value) {
-      case "alphabeticAsc":
-        dispatch({ type: ALPHABETIC_ASC });
+      case "api":
+        dispatch({ type: GET_API_POKEMONS });
         break;
 
-      case "alphabeticDesc":
-        dispatch({ type: ALPHABETIC_DESC });
+      case "db":
+        dispatch({ type: GET_DB_POKEMONS });
         break;
 
       default:
+        dispatch(rechargeAllPokemons());
         break;
     }
   };
 };
+
+export const alphabeticOrder = (value) => {
+  return function (dispatch) {
+    switch (value) {
+      case "a_z":
+        dispatch({ type: A_Z });
+        break;
+
+      case "z_a":
+        dispatch({ type: Z_A });
+        break;
+
+      default:
+        dispatch({ type: INDISTINCT_ORDER });
+        break;
+    }
+  };
+};
+
+// export const
