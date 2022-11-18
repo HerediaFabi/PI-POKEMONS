@@ -6,6 +6,7 @@ const {
   createPokemon,
 } = require("../controllers/pokemons");
 const { Pokemon } = require("../db");
+const checkData = require("../middlewares/checkData");
 
 const pokemonRouter = Router();
 
@@ -29,13 +30,16 @@ pokemonRouter.get("/:id", async (req, res) => {
   }
 });
 
-pokemonRouter.post("/", async (req, res) => {
+pokemonRouter.post("/", checkData, async (req, res) => {
   try {
+    console.log("RUTA");
     createPokemon(req.body);
     console.log("Holis");
     res.status(200).send(`Pokemon successfully created!`);
   } catch (error) {
-    res.status(400).send("Something went wrong");
+    console.log("HOLA?");
+    console.log(error);
+    res.status(400).send(error.message);
   }
 });
 

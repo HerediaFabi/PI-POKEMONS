@@ -44,8 +44,13 @@ export const getTypes = () => {
 
 export const postPokemon = (data) => {
   return async function () {
-    const info = await axios.post("http://localhost:3001/pokemons", data);
-    return info.data;
+    try {
+      const response = await axios.post("http://localhost:3001/pokemons", data);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return error.response.data;
+    }
   };
 };
 
