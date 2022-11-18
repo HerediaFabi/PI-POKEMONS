@@ -2,57 +2,53 @@ const axios = require("axios");
 const { Pokemon, Type } = require("../db");
 
 const getAll = async () => {
-  try {
-    const info = await axios.get("https://pokeapi.co/api/v2/pokemon");
-    const info2 = await axios.get(info.data.next);
+  const info = await axios.get("https://pokeapi.co/api/v2/pokemon");
+  const info2 = await axios.get(info.data.next);
 
-    const mergeResults = [...info.data.results, ...info2.data.results]; //? TRAER 40 POKEMONES
+  const mergeResults = [...info.data.results, ...info2.data.results]; //? TRAER 40 POKEMONES
 
-    const arrayPromise = await info.data.results.map(async (element) => {
-      return await axios.get(element.url); //!whats
-    });
-    const promiseData = await Promise.all(arrayPromise);
-    const pokeInfo = promiseData?.map((element) => element.data);
-    const pokemons = pokeInfo?.map((element) => {
-      return {
-        id: element.id,
-        name: element.name,
-        image: element.sprites.other["official-artwork"].front_default,
-        attack: element.stats.find((el) => el.stat.name === "attack").base_stat,
-        types: element.types.map((element) => element.type.name),
-      };
-    });
+  const arrayPromise = await mergeResults?.map(async (element) => {
+    return await axios.get(element.url); //!whats
+  });
+  const promiseData = await Promise.all(arrayPromise);
+  const pokeInfo = promiseData?.map((element) => element.data);
+  const pokemons = pokeInfo?.map((element) => {
+    return {
+      id: element.id,
+      name: element.name,
+      image: element.sprites.other["official-artwork"].front_default,
+      attack: element.stats.find((el) => el.stat.name === "attack").base_stat,
+      types: element.types.map((element) => element.type.name),
+    };
+  });
 
-    const dbPokemons = await Pokemon.findAll({
-      include: {
-        model: Type,
-        attributes: ["name"],
-        through: {
-          attributes: [],
-        },
+  const dbPokemons = await Pokemon.findAll({
+    include: {
+      model: Type,
+      attributes: ["name"],
+      through: {
+        attributes: [],
       },
-    });
-    // let pokemons = [];
+    },
+  });
+  // let pokemons = [];
 
-    // for (let i = 0; i < 5; i++) {
-    //   // let infoPokemon = await axios.get(urls[i]);
-    //   // console.log(infoPokemon);
-    //   // let types = [];
-    //   // for (const type of infoPokemon.data.types) {
-    //   //   console.log(type["type"].name);
-    //   // }
-    //   // console.log({
-    //   //   id: infoPokemon.data.id,
-    //   //   name: infoPokemon.data.name,
-    //   //   image: infoPokemon.data.sprites.other["official-artwork"].front_default,
-    //   //   types,
-    //   // });
-    //   // console.log(pokemons.length);
-    // }
-    return [...pokemons, ...dbPokemons];
-  } catch (error) {
-    return error.message;
-  } //! Por qué una copia?
+  // for (let i = 0; i < 5; i++) {
+  //   // let infoPokemon = await axios.get(urls[i]);
+  //   // console.log(infoPokemon);
+  //   // let types = [];
+  //   // for (const type of infoPokemon.data.types) {
+  //   //   console.log(type["type"].name);
+  //   // }
+  //   // console.log({
+  //   //   id: infoPokemon.data.id,
+  //   //   name: infoPokemon.data.name,
+  //   //   image: infoPokemon.data.sprites.other["official-artwork"].front_default,
+  //   //   types,
+  //   // });
+  //   // console.log(pokemons.length);
+  // }
+  return [...pokemons, ...dbPokemons]; //! Por qué una copia?
 };
 
 const getPokemonById = async (id) => {

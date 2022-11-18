@@ -11,7 +11,7 @@ import {
 import PokemonCard from "../PokemonCard/PokemonCard";
 import Paginated from "../Paginated/Paginated";
 import Navbar from "../Navbar/Navbar";
-import "./Home.css";
+import styles from "./Home.module.css";
 
 const Home = (props) => {
   const dispatch = useDispatch();
@@ -81,10 +81,10 @@ const Home = (props) => {
   return (
     <>
       <Navbar />
-      <div className="home">
+      <div className={styles.home}>
         {filteredPokemons.length ? (
-          <div className="container">
-            <div className="filters">
+          <div className={styles.container}>
+            <div className={styles.filters}>
               <div>
                 <button onClick={() => recharge()}>Recharge</button>
               </div>
@@ -135,7 +135,7 @@ const Home = (props) => {
                 </select>
               </div>
             </div>
-            <div className="pokemons">
+            <div className={styles.pokemons}>
               <Paginated
                 key="paginated1"
                 array={filteredPokemons}
@@ -151,6 +151,11 @@ const Home = (props) => {
                     name={pokemon.name}
                     image={pokemon.image}
                     types={pokemon.types}
+                    mainType={
+                      pokemon.types[0].hasOwnProperty("name")
+                        ? pokemon.types[0].name
+                        : pokemon.types[0]
+                    }
                   />
                 );
               })}
@@ -164,9 +169,9 @@ const Home = (props) => {
             </div>
           </div>
         ) : (
-          <div className="wrapper">
-            <div className="pokeball"></div>
-            <span className="loadingText">Loading...</span>
+          <div className={styles.wrapper}>
+            <div className={styles.pokeball}></div>
+            <span className={styles.loadingText}>Loading...</span>
           </div>
         )}
       </div>

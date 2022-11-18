@@ -1,7 +1,7 @@
 import React from "react";
-import "./PokemonDetail.css";
-import "../../css/types.css";
-import "../../css/cardHover.css";
+import styles from "./PokemonDetail.module.css";
+import iconsStyles from "../../css/icons.module.css";
+import cardStyles from "../../css/card.module.css";
 import { getPokemonById, cleanDetail } from "../../redux/actions/index";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,50 +26,58 @@ const PokemonDetail = (props) => {
   console.log(pokemon);
 
   return (
-    <div className="detail">
+    <div className={styles.detail}>
       <Navbar />
       {Object.keys(pokemon).length !== 0 ? (
-        <div className="detail-card card">
+        <div className={`${styles["detail-card"]} ${cardStyles.card}`}>
           <p
-            className={`detail-name ${
-              pokemon.types[0].hasOwnProperty("name")
-                ? pokemon.types[0].name
-                : pokemon.types[0]
+            className={`${styles["detail-name"]} ${
+              iconsStyles[
+                pokemon.types[0].hasOwnProperty("name")
+                  ? pokemon.types[0].name
+                  : pokemon.types[0]
+              ]
             }`}
           >
             {pokemon.name}
           </p>
-          <div className="section-group">
-            <div className="detail-section">
-              <div className="icon detail-icon tooltip" id="pokemon-id">
+          <div className={styles["section-group"]}>
+            <div className={styles["detail-section"]}>
+              <div
+                className={`${iconsStyles.icon} ${styles["detail-icon"]} ${iconsStyles.tooltip} ${iconsStyles["pokemon-id"]}`}
+              >
                 <img
                   src="https://img.icons8.com/ios-filled/512/pokeball--v2.png"
                   alt=""
                 />
-                <span class="tooltiptext">
+                <span className={styles.tooltiptext}>
                   <p>ID: {pokemon.id}</p>
                 </span>
               </div>
-              <div className="icon detail-icon tooltip" id="pokemon-weight">
+              <div
+                className={`${iconsStyles.icon} ${styles["detail-icon"]} ${iconsStyles.tooltip} ${iconsStyles["pokemon-weight"]}`}
+              >
                 <img
                   src="https://img.icons8.com/ios-glyphs/512/weight-1.png  "
                   alt=""
                 />
-                <span class="tooltiptext">
+                <span className={styles.tooltiptext}>
                   <p>Weight: {pokemon.weight}</p>
                 </span>
               </div>
-              <div className="icon detail-icon tooltip" id="pokemon-height">
+              <div
+                className={`${iconsStyles.icon} ${styles["detail-icon"]} ${iconsStyles.tooltip} ${iconsStyles["pokemon-height"]}`}
+              >
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/4733/4733563.png"
                   alt=""
                 />
-                <span class="tooltiptext">
+                <span className={styles.tooltiptext}>
                   <p> Height: {pokemon.height}</p>
                 </span>
               </div>
             </div>
-            <div className="detail-section">
+            <div className={styles["detail-section"]}>
               <div id="pokemon-image">
                 <img src={pokemon.image} alt={pokemon.name} />
               </div>
@@ -79,30 +87,36 @@ const PokemonDetail = (props) => {
               </div>
             </div>
             <div className="detail-section">
-              <div className="icon detail-icon tooltip" id="pokemon-attack">
+              <div
+                className={`${iconsStyles.icon} ${styles["detail-icon"]} ${iconsStyles.tooltip} ${iconsStyles["pokemon-attack"]}`}
+              >
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/8294/8294510.png"
                   alt=""
                 />
-                <span class="tooltiptext">
+                <span className={styles.tooltiptext}>
                   <p>Attack: {pokemon.attack}</p>
                 </span>
               </div>
-              <div className="icon detail-icon tooltip" id="pokemon-defense">
+              <div
+                className={`${iconsStyles.icon} ${styles["detail-icon"]} ${iconsStyles.tooltip} ${iconsStyles["pokemon-defense"]}`}
+              >
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/8294/8294515.png"
                   alt=""
                 />
-                <span class="tooltiptext">
+                <span className={styles.tooltiptext}>
                   <p>Defense: {pokemon.defense}</p>
                 </span>
               </div>
-              <div className="icon detail-icon tooltip" id="pokemon-speed">
+              <div
+                className={`${iconsStyles.icon} ${styles["detail-icon"]} ${iconsStyles.tooltip} ${iconsStyles["pokemon-speed"]}`}
+              >
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/4824/4824507.png"
                   alt=""
                 />
-                <span class="tooltiptext">
+                <span className={styles.tooltiptext}>
                   <p>Speed: {pokemon.speed}</p>
                 </span>
               </div>

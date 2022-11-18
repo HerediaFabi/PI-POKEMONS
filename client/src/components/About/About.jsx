@@ -1,5 +1,5 @@
 import React from "react";
-import "./About.css";
+import style from "./About.module.css";
 import Navbar from "../Navbar/Navbar";
 
 const About = (props) => {

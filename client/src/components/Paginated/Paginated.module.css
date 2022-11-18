@@ -22,12 +22,12 @@
   cursor: pointer;
 }
 
-input[type="radio"]:checked + label {
+.radio:checked + label {
   box-shadow: 0 1px #000;
   transform: translateY(4px);
   background-color: #24a2c6;
 }
 
-input[type="radio"] {
+.radio {
   display: none;
 }

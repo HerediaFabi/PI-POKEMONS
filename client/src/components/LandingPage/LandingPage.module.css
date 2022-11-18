@@ -28,7 +28,7 @@
   width: 100%;
 }
 
-#pokemon-logo {
+.pokemon-logo {
   filter: drop-shadow(0 5px 0 #000);
 }
 
@@ -51,14 +51,14 @@
   transform: rotateY(360deg);
 }
 
-#btnLanding {
+.btnLanding {
   font-weight: bold;
   letter-spacing: 5px;
   display: flex;
   width: 90%;
 }
 
-#btnLanding a {
+.btnLanding a {
   background-color: #08559c;
   width: 100%;
   padding: 1rem;
@@ -72,12 +72,12 @@
   border-radius: 5px;
 }
 
-#btnLanding a:hover {
+.btnLanding a:hover {
   transition: 0.5s;
   background-color: #1c79cf;
 }
 
-#btnLanding a:active {
+.btnLanding a:active {
   transition: none;
   background-color: #052644;
   box-shadow: 0 1px #000;

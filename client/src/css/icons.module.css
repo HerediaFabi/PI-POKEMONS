@@ -22,6 +22,14 @@ div .icon {
   box-shadow: 0 1px 0 #000;
 }
 
+.icon img {
+  position: relative;
+  filter: invert(100%);
+  width: 3rem;
+  top: 1rem;
+  left: 1rem;
+}
+
 .icon.bug {
   background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/3c/Pok%C3%A9mon_Bug_Type_Icon.svg);
   background-color: #92bc2c;
@@ -126,6 +134,136 @@ div .icon {
 .icon.water {
   background-image: url(https://upload.wikimedia.org/wikipedia/commons/0/0b/Pok%C3%A9mon_Water_Type_Icon.svg);
   background-color: #539ddf;
+}
+
+.bug:hover {
+  background-color: #aaff00;
+  box-shadow: 0 0 50px #aaff00;
+}
+
+.dark:hover {
+  background-color: #595761;
+  box-shadow: 0 0 50px #595761;
+}
+
+.dragon:hover {
+  background-color: #0c69c8;
+  box-shadow: 0 0 50px #0c69c8;
+}
+
+.electric:hover {
+  background-color: #f2d94e;
+  box-shadow: 0 0 50px #f2d94e;
+}
+
+.fire:hover {
+  background-color: #ff9800;
+  box-shadow: 0 0 50px #fd9800;
+}
+
+.fairy:hover {
+  background-color: #ee90e6;
+  box-shadow: 0 0 50px #ee90e6;
+}
+
+.fighting:hover {
+  background-color: #d3425f;
+  box-shadow: 0 0 50px #d3425f;
+}
+
+.flying:hover {
+  background-color: #98beff;
+  box-shadow: 0 0 50px #98beff;
+}
+
+.ghost:hover {
+  background-color: #5f6dbc;
+  box-shadow: 0 0 50px #5f6dbc;
+}
+
+.grass:hover {
+  background-color: #42e257;
+  box-shadow: 0 0 50px #42e257;
+}
+
+.ground:hover {
+  background-color: #da7c4d;
+  box-shadow: 0 0 50px #da7c4d;
+}
+
+.ice:hover {
+  background-color: #75d0c1;
+  box-shadow: 0 0 50px #75d0c1;
+}
+
+.normal:hover {
+  background-color: #a0a29f;
+  box-shadow: 0 0 50px #a0a29f;
+}
+
+.poison:hover {
+  background-color: #b763cf;
+  box-shadow: 0 0 50px #b763cf;
+}
+
+.psychic:hover {
+  background-color: #fa8581;
+  box-shadow: 0 0 50px #fa8581;
+}
+
+.rock:hover {
+  background-color: #c9bb8a;
+  box-shadow: 0 0 50px #c9bb8a;
+}
+
+.shadow:hover {
+  background-color: #000;
+  box-shadow: 0 0 50px #000;
+}
+
+.steel:hover {
+  background-color: #5695a3;
+  box-shadow: 0 0 50px #5695a3;
+}
+
+.unknown:hover {
+  background-color: #25b7d3;
+  box-shadow: 0 0 50px #25b7d3;
+}
+
+.water:hover {
+  background-color: #539ddf;
+  box-shadow: 0 0 50px #539ddf;
+}
+
+.pokemon-id:hover {
+  background-color: #fd5555;
+  box-shadow: 0 0 50px #fd5555;
+}
+
+.pokemon-weight:hover {
+  background-color: #7270fd;
+  box-shadow: 0 0 50px #7270fd;
+}
+
+.pokemon-height:hover {
+  background-color: #faa92e;
+  box-shadow: 0 0 50px #faa92e;
+}
+
+.pokemon-attack:hover {
+  background-color: #c53dd1;
+  box-shadow: 0 0 50px #c53dd1;
+}
+
+.pokemon-defense:hover {
+  background-color: #55b343;
+  box-shadow: 0 0 50px #55b343;
+}
+
+.pokemon-speed:hover {
+  background-color: #37c4d6;
+  box-shadow: 0 0 50px #37c4d6;
 }
 
 .tooltip {

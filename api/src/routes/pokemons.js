@@ -32,14 +32,11 @@ pokemonRouter.get("/:id", async (req, res) => {
 
 pokemonRouter.post("/", checkData, async (req, res) => {
   try {
-    console.log("RUTA");
     createPokemon(req.body);
-    console.log("Holis");
     res.status(200).send(`Pokemon successfully created!`);
   } catch (error) {
-    console.log("HOLA?");
     console.log(error);
-    res.status(400).send(error.message);
+    res.status(400).send(error);
   }
 });
 

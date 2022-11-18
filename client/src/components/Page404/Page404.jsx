@@ -1,5 +1,5 @@
 import React from "react";
-// import "./Page404.css";
+import style from "./Page404.module.css";
 
 const Page404 = (props) => {
   return (

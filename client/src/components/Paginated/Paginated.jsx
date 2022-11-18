@@ -1,26 +1,24 @@
 import React from "react";
-import "./Paginated.css";
+import styles from "./Paginated.module.css";
 
 const Paginated = ({ paginated, array, name, currentPage }) => {
-  let pages = [1];
+  let pages = [];
   const pokemonsPerPage = 12;
   let contador = 1;
   for (let i = 0; i < array.length; i++) {
     if (contador === 1) {
-      pages.push(pages.at(-1) + 1);
+      if (pages.length === 0) pages.push(1);
+      else pages.push(pages.at(-1) + 1);
     }
-    if (contador === pokemonsPerPage) {
-      contador = 0;
-    }
+    if (contador === pokemonsPerPage) contador = 0;
     contador++;
   }
-  pages.pop();
 
   return (
-    <div className="paginated">
+    <div className={styles.paginated}>
       {pages.map((page) => {
         return (
-          <div key={page} className="page">
+          <div key={page} className={styles.page}>
             <input
               onChange={() => {
                 paginated(page);
@@ -29,6 +27,7 @@ const Paginated = ({ paginated, array, name, currentPage }) => {
               name={name}
               id={page}
               checked={page === currentPage}
+              className={styles.radio}
             />
             <label htmlFor={page}>{page}</label>
           </div>

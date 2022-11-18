@@ -1,27 +1,27 @@
 import React from "react";
-import "./PokemonCard.css";
-import "../../css/types.css";
-import "../../css/cardHover.css";
+import styles from "./PokemonCard.module.css";
+import iconsStyles from "../../css/icons.module.css";
+import cardStyles from "../../css/card.module.css";
 import { Link } from "react-router-dom";
 
 const PokemonCard = (props) => {
-  console.log(props);
+  console.log(props.mainType);
+
+  const cardType = iconsStyles[props.mainType];
+
   return (
-    <div
-      className={`card 
-    ${
-      props.types[0].hasOwnProperty("name")
-        ? props.types[0].name
-        : props.types[0]
-    }`}
-    >
-      <p className="name">{props.name}</p>
+    <div className={`${cardStyles.card}  ${cardType}`}>
+      <p className={styles.name}>{props.name}</p>
       <img src={props.image} alt={props.name} />
-      <div className="pokemon-types">
+      <div className={styles["pokemon-types"]}>
         {props.types.map((t) => {
           return (
-            <div class={`icon ${t.name ? t.name : t} tooltip`}>
-              <span class="tooltiptext">
+            <div
+              class={`${iconsStyles.icon} ${iconsStyles[t.name ? t.name : t]} ${
+                iconsStyles.tooltip
+              }`}
+            >
+              <span class={iconsStyles.tooltiptext}>
                 {(t.name ? t.name : t)
                   .charAt(0)
                   .toUpperCase()
@@ -31,8 +31,8 @@ const PokemonCard = (props) => {
           );
         })}
       </div>
-      <div className="button-container">
-        <Link to={`/pokemons/${props.id}`} className="button">
+      <div className={styles["button-container"]}>
+        <Link to={`/pokemons/${props.id}`} className={styles.button}>
           <span>Ver detalle</span>
         </Link>
       </div>

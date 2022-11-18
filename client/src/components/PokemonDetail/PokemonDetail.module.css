@@ -66,14 +66,6 @@ p {
   height: 5rem;
 }
 
-.detail-section .icon img {
-  position: relative;
-  filter: invert(100%);
-  width: 3rem;
-  top: 1rem;
-  left: 1rem;
-}
-
 .detail-icon {
   background-color: #333;
 }
@@ -91,34 +83,4 @@ p {
   height: 7px;
   background-color: #0f0;
   border-radius: 15px;
-}
-
-#pokemon-id:hover {
-  background-color: #fd5555;
-  box-shadow: 0 0 50px #fd5555;
-}
-
-#pokemon-weight:hover {
-  background-color: #7270fd;
-  box-shadow: 0 0 50px #7270fd;
-}
-
-#pokemon-height:hover {
-  background-color: #faa92e;
-  box-shadow: 0 0 50px #faa92e;
-}
-
-#pokemon-attack:hover {
-  background-color: #c53dd1;
-  box-shadow: 0 0 50px #c53dd1;
-}
-
-#pokemon-defense:hover {
-  background-color: #55b343;
-  box-shadow: 0 0 50px #55b343;
-}
-
-#pokemon-speed:hover {
-  background-color: #37c4d6;
-  box-shadow: 0 0 50px #37c4d6;
 }

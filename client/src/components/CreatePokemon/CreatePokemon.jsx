@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getTypes, postPokemon } from "../../redux/actions/index";
-import "./CreatePokemon.css";
+import style from "./CreatePokemon.module.css";
 import Navbar from "../Navbar/Navbar";
 
 const CreatePokemon = (props) => {
