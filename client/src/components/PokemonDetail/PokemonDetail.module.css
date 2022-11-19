@@ -11,7 +11,7 @@ p {
 .detail-card {
   display: flex;
   justify-content: center;
-  width: 35rem;
+  width: 31rem;
   flex-wrap: wrap;
   background-size: contain;
   background-repeat: no-repeat;
@@ -22,12 +22,11 @@ p {
   background-color: #222;
   border: 1px solid #000;
   transition: 1s;
-  padding: 15px;
+  padding: 5px;
 }
 
 .detail-name {
   transition: 0.5s;
-  /* background-color: #0f0; */
   padding: 5px 15px;
   border-radius: 15px;
   letter-spacing: 5px;
@@ -40,37 +39,25 @@ p {
     -1px -1px #000, 1px -1px #000, -1px 1px #000;
 }
 
-.detail-card img {
-  width: 20rem;
-  filter: saturate(200%);
-}
-
 .section-group {
   margin-bottom: 5px;
-  display: flex;
   width: 100%;
+  display: flex;
+  /* background-color: red; */
+  justify-content: center;
 }
 
 .detail-section {
-  /* background-color: red; */
-  width: 100%;
-  margin: 5px;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-.detail-section div.icon {
-  margin: 5px;
-  width: 5rem;
-  height: 5rem;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.detail-icon {
-  background-color: #333;
+.pokemon-image img {
+  width: 17rem;
 }
 
-#pokemon-hp {
+.pokemon-hp {
   width: 100%;
   display: flex;
   flex-direction: column;
