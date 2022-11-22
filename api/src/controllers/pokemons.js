@@ -131,6 +131,8 @@ const getPokemonByName = async (name) => {
 const createPokemon = async (body) => {
   const { name, hp, attack, defense, speed, height, weight, image, types } =
     body;
+
+  console.log({ image });
   const data = {
     name,
     hp,
@@ -139,7 +141,9 @@ const createPokemon = async (body) => {
     speed,
     height,
     weight,
-    image,
+    image: image
+      ? image
+      : "https://cdn-icons-png.flaticon.com/512/189/189665.png",
   };
   let newPokemon = await Pokemon.create(data);
 
@@ -157,7 +161,10 @@ const deletePokemon = async (id) => {
     },
   });
 
-  await dbPokemon.destroy();
+  console.log(dbPokemon.length);
+
+  if (dbPokemon) await dbPokemon.destroy();
+
   return;
 };
 

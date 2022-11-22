@@ -12,18 +12,15 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      // unique: true,
-      defaultValue: "unknown",
     },
     image: {
       type: DataTypes.STRING,
-      defaultValue: "https://cdn-icons-png.flaticon.com/512/189/189665.png",
     },
-    hp: { type: DataTypes.INTEGER, defaultValue: 0 },
-    attack: { type: DataTypes.INTEGER, defaultValue: 0 },
-    defense: { type: DataTypes.INTEGER, defaultValue: 0 },
-    speed: { type: DataTypes.INTEGER, defaultValue: 0 },
-    height: { type: DataTypes.INTEGER, defaultValue: 0 },
-    weight: { type: DataTypes.INTEGER, defaultValue: 0 },
+    hp: DataTypes.INTEGER,
+    attack: DataTypes.INTEGER,
+    defense: DataTypes.INTEGER,
+    speed: DataTypes.INTEGER,
+    height: DataTypes.INTEGER,
+    weight: DataTypes.INTEGER,
   });
 };

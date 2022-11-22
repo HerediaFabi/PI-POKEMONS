@@ -12,6 +12,7 @@ export const MAX_ATTACK = "MAX_ATTACK";
 export const MIN_ATTACK = "MIX_ATTACK";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const RECHARGE_ALL_POKEMONS = "RECHARGE_ALL_POKEMONS";
+export const DELETE_POKEMON = "DELETE_POKEMON";
 
 export const getPokemons = () => {
   return async function (dispatch) {
@@ -40,8 +41,12 @@ export const getPokemonByName = (name) => {
 
 export const getTypes = () => {
   return async function (dispatch) {
-    const info = await axios.get("http://localhost:3001/types");
-    dispatch({ type: GET_TYPES, payload: info.data });
+    try {
+      const info = await axios.get("http://localhost:3001/types");
+      dispatch({ type: GET_TYPES, payload: info.data });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
@@ -60,12 +65,9 @@ export const postPokemon = (data) => {
 export const deletePokemon = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios.delete(
-        "http://localhost:3001/pokemons/" + id
-      );
-      console.log(response);
-      dispatch(getPokemonById(id));
-      return response.data;
+      await axios.delete("http://localhost:3001/pokemons/" + id);
+      dispatch({ type: DELETE_POKEMON });
+      return "Pokemon deleted";
     } catch (error) {
       return "ERROR";
     }

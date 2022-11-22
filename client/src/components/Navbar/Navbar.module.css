@@ -29,7 +29,7 @@
   filter: saturate(200%) contrast(200%) drop-shadow(0 0 15px #fff);
 }
 
-.navbar div a.navlink {
+.navbar div .navlink {
   font-weight: bold;
   font-size: 17px;
   margin: 0 0.5rem;
@@ -53,15 +53,15 @@
   border: unset;
 }
 
-.navbar a.navlink:hover {
+.navbar .navlink:hover {
   background-color: #17285e;
 }
 
-.navbar .navlink.active {
+.navbar .navLink.active {
   background-color: #0b61b3;
 }
 
-.navbar a.navlink:active {
+.navbar .navlink:active {
   box-shadow: 0 0 #000;
   transform: translateY(4px);
 }

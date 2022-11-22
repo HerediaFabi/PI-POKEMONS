@@ -22,7 +22,7 @@ const CreatePokemon = (props) => {
 
   const [errors, setErrors] = useState({
     name: "",
-    image: "",
+    // image: "",
     height: "",
     weight: "",
     hp: "",
@@ -51,7 +51,7 @@ const CreatePokemon = (props) => {
 
     setErrors({
       name: "",
-      image: "",
+      // image: "",
       height: "",
       weight: "",
       hp: "",
@@ -132,15 +132,17 @@ const CreatePokemon = (props) => {
         break;
 
       case "image":
-        if (value === "")
+        // if (value === "")
+        //   return (auxErrors = {
+        //     ...errors,
+        //     [prop]: `${capitalize(prop)} is required`,
+        //   });
+        if (value !== "" && value.search(/(https?:\/\/.*\.(?:png|jpg))/i) !== 0)
           return (auxErrors = {
             ...errors,
-            [prop]: `${capitalize(prop)} is required`,
-          });
-        if (value.search(/(https?:\/\/.*\.(?:png|jpg))/i) !== 0)
-          return (auxErrors = {
-            ...errors,
-            [prop]: `${capitalize(prop)} has to be a valid image url`,
+            [prop]: `${capitalize(
+              prop
+            )} has to be a valid png or jpg image URL`,
           });
         delete auxErrors[prop];
         break;

@@ -4,7 +4,7 @@ const checkData = (req, res, next) => {
 
   const errors = [];
 
-  console.log(hp);
+  console.log(image);
 
   const addError = (variableName) => {
     errors.push(variableName);
@@ -23,7 +23,7 @@ const checkData = (req, res, next) => {
   };
 
   validateString(name, "name");
-  validateString(image, "image");
+  // validateString(image, "image");
   validateNumber(height, "height");
   validateNumber(weight, "weight");
   validateNumber(hp, "hp");
@@ -36,7 +36,6 @@ const checkData = (req, res, next) => {
     for (let i = 0; i < errors.length; i++) {
       errors[i] = errors[i].replace("", " ");
     }
-    console.log("ERROR");
     res.status(400).send(`The following data is incorrect: ${errors}`);
   } else {
     next();

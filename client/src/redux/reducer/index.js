@@ -11,6 +11,7 @@ import {
   RECHARGE_ALL_POKEMONS,
   MAX_ATTACK,
   MIN_ATTACK,
+  DELETE_POKEMON,
 } from "../actions/index";
 
 import {
@@ -91,6 +92,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         filteredPokemons: attackMin(state.filteredPokemons),
+      };
+
+    case DELETE_POKEMON:
+      return {
+        ...state,
+        pokemonDetail: { message: "Pokemon not found" },
       };
 
     default:
