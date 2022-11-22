@@ -297,6 +297,13 @@ div.icon img {
   z-index: 1;
 }
 
+.tooltip .tooltiptext-right {
+  bottom: 0;
+  margin-left: 0;
+  top: -5px;
+  left: 50%;
+}
+
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }

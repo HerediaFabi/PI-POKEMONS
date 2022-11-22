@@ -23,6 +23,7 @@ p {
   border: 1px solid #000;
   transition: 1s;
   padding: 5px;
+  position: relative;
 }
 
 .detail-name {
@@ -39,11 +40,39 @@ p {
     -1px -1px #000, 1px -1px #000, -1px 1px #000;
 }
 
+.delete-button {
+  background-color: rgb(230, 44, 44);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 32px;
+  height: 32px;
+  box-shadow: 0px 5px 0 #000;
+  border: 1px solid #000;
+}
+
+.delete-button:hover {
+  background-color: #f00;
+}
+
+.delete-button:active {
+  transform: translateY(4px);
+  box-shadow: 0px 1px 0 #000;
+}
+
+.delete-button img {
+  filter: invert(100%);
+  width: 20px;
+}
+
 .section-group {
   margin-bottom: 5px;
   width: 100%;
   display: flex;
-  /* background-color: red; */
   justify-content: center;
 }
 
@@ -70,4 +99,17 @@ p {
   height: 7px;
   background-color: #0f0;
   border-radius: 15px;
+}
+
+.message-div {
+  background-color: #333;
+  margin-top: 200px;
+  padding: 20px;
+  border-radius: 15px;
+  border: solid 1px #000;
+  font-size: 30px;
+}
+
+.not-found {
+  background-color: rgb(170, 1, 1);
 }

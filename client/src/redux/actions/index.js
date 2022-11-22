@@ -10,7 +10,6 @@ export const A_Z = "A_Z";
 export const Z_A = "Z_A";
 export const MAX_ATTACK = "MAX_ATTACK";
 export const MIN_ATTACK = "MIX_ATTACK";
-export const INDISTINCT_ORDER = "INDISTINCT_ORDER";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const RECHARGE_ALL_POKEMONS = "RECHARGE_ALL_POKEMONS";
 
@@ -23,8 +22,12 @@ export const getPokemons = () => {
 
 export const getPokemonById = (id) => {
   return async function (dispatch) {
-    const info = await axios.get(`http://localhost:3001/pokemons/${id}`);
-    dispatch({ type: GET_POKEMON_BY_ID, payload: info.data });
+    try {
+      const info = await axios.get(`http://localhost:3001/pokemons/${id}`);
+      dispatch({ type: GET_POKEMON_BY_ID, payload: info.data });
+    } catch (error) {
+      dispatch({ type: GET_POKEMON_BY_ID, payload: error.response.data });
+    }
   };
 };
 
@@ -50,6 +53,21 @@ export const postPokemon = (data) => {
     } catch (error) {
       console.log(error);
       return error.response.data;
+    }
+  };
+};
+
+export const deletePokemon = (id) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(
+        "http://localhost:3001/pokemons/" + id
+      );
+      console.log(response);
+      dispatch(getPokemonById(id));
+      return response.data;
+    } catch (error) {
+      return "ERROR";
     }
   };
 };
@@ -96,7 +114,7 @@ export const alphabeticOrder = (value) => {
         break;
 
       default:
-        dispatch({ type: INDISTINCT_ORDER });
+        dispatch({ type: A_Z });
         break;
     }
   };
@@ -106,15 +124,15 @@ export const statsOrder = (value) => {
   return function (dispatch) {
     switch (value) {
       case "max_attack":
-        dispatch({ type: MAX_ATTACK, payload: value.slice(4) });
+        dispatch({ type: MAX_ATTACK });
         break;
 
       case "min_attack":
-        dispatch({ type: MIN_ATTACK, payload: value.slice(4) });
+        dispatch({ type: MIN_ATTACK });
         break;
 
       default:
-        dispatch({ type: INDISTINCT_ORDER });
+        dispatch({ type: MAX_ATTACK });
         break;
     }
   };

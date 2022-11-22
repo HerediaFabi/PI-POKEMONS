@@ -2,25 +2,27 @@ const axios = require("axios");
 const { Pokemon, Type } = require("../db");
 
 const getAll = async () => {
-  const info = await axios.get("https://pokeapi.co/api/v2/pokemon");
-  const info2 = await axios.get(info.data.next);
+  // const info = await axios.get("https://pokeapi.co/api/v2/pokemon");
+  // const info2 = await axios.get(info.data.next);
 
-  const mergeResults = [...info.data.results, ...info2.data.results]; //? TRAER 40 POKEMONES
+  // const mergeResults = [...info.data.results, ...info2.data.results]; //? TRAER 40 POKEMONES
 
-  const arrayPromise = await mergeResults?.map(async (element) => {
-    return await axios.get(element.url); //!whats
-  });
-  const promiseData = await Promise.all(arrayPromise);
-  const pokeInfo = promiseData?.map((element) => element.data);
-  const pokemons = pokeInfo?.map((element) => {
-    return {
-      id: element.id,
-      name: element.name,
-      image: element.sprites.other["official-artwork"].front_default,
-      attack: element.stats.find((el) => el.stat.name === "attack").base_stat,
-      types: element.types.map((element) => element.type.name),
-    };
-  });
+  // const arrayPromise = await mergeResults?.map((element) => {
+  //   return axios.get(element.url);
+  // });
+  // console.log(arrayPromise);
+  // const promiseData = await axios.all(arrayPromise);
+  // console.log("a");
+  // const pokeInfo = promiseData?.map((element) => element.data);
+  // const pokemons = pokeInfo?.map((element) => {
+  //   return {
+  //     id: element.id,
+  //     name: element.name,
+  //     image: element.sprites.other["official-artwork"].front_default,
+  //     attack: element.stats.find((el) => el.stat.name === "attack").base_stat,
+  //     types: element.types.map((element) => element.type.name),
+  //   };
+  // });
 
   const dbPokemons = await Pokemon.findAll({
     include: {
@@ -48,10 +50,12 @@ const getAll = async () => {
   //   // });
   //   // console.log(pokemons.length);
   // }
-  return [...pokemons, ...dbPokemons]; //! Por qué una copia?
+  return [...dbPokemons];
 };
 
 const getPokemonById = async (id) => {
+  try {
+  } catch (error) {}
   if (isNaN(id)) {
     const dbPokemon = await Pokemon.findByPk(id, {
       include: {
@@ -142,9 +146,25 @@ const createPokemon = async (body) => {
   types ? newPokemon.addTypes(types) : newPokemon.addTypes(19);
 };
 
+const deletePokemon = async (id) => {
+  const dbPokemon = await Pokemon.findByPk(id, {
+    include: {
+      model: Type,
+      attributes: ["name"],
+      through: {
+        attributes: [],
+      },
+    },
+  });
+
+  await dbPokemon.destroy();
+  return;
+};
+
 module.exports = {
   getAll,
   getPokemonById,
   getPokemonByName,
   createPokemon,
+  deletePokemon,
 };

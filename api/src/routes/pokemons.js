@@ -4,8 +4,8 @@ const {
   getPokemonById,
   getPokemonByName,
   createPokemon,
+  deletePokemon,
 } = require("../controllers/pokemons");
-const { Pokemon } = require("../db");
 const checkData = require("../middlewares/checkData");
 
 const pokemonRouter = Router();
@@ -16,7 +16,9 @@ pokemonRouter.get("/", async (req, res) => {
     const result = name ? await getPokemonByName(name) : await getAll();
     res.status(200).json(result);
   } catch (error) {
-    const result = name ? "Name error " + error.message : "GET ALL error";
+    const result = name
+      ? `No pokemon with the name ${name} was found`
+      : "GET ALL error";
     res.status(400).send(result);
   }
 });
@@ -26,7 +28,7 @@ pokemonRouter.get("/:id", async (req, res) => {
     const result = await getPokemonById(req.params.id);
     res.status(200).json(result);
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(400).json({ message: "Pokemon not found" });
   }
 });
 
@@ -37,6 +39,16 @@ pokemonRouter.post("/", checkData, async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(400).send(error);
+  }
+});
+
+pokemonRouter.delete("/:id", async (req, res) => {
+  try {
+    deletePokemon(req.params.id);
+    res.status(200).send(`Pokemon successfully deleted`);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send("Something went wrong");
   }
 });
 

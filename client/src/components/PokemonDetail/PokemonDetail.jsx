@@ -2,7 +2,11 @@ import React from "react";
 import styles from "./PokemonDetail.module.css";
 import iconsStyles from "../../css/icons.module.css";
 import cardStyles from "../../css/card.module.css";
-import { getPokemonById, cleanDetail } from "../../redux/actions/index";
+import {
+  getPokemonById,
+  cleanDetail,
+  deletePokemon,
+} from "../../redux/actions/index";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../Navbar/Navbar";
@@ -28,7 +32,8 @@ const PokemonDetail = (props) => {
   return (
     <div className={styles.detail}>
       <Navbar />
-      {Object.keys(pokemon).length !== 0 ? (
+      {Object.keys(pokemon).length !== 0 &&
+      !pokemon.hasOwnProperty("message") ? (
         <div className={`${styles["detail-card"]} ${cardStyles.card}`}>
           <p
             className={`${styles["detail-name"]} ${
@@ -41,6 +46,22 @@ const PokemonDetail = (props) => {
           >
             {pokemon.name}
           </p>
+          <button
+            className={`${iconsStyles.tooltip} ${styles["delete-button"]}`}
+            onClick={async () =>
+              alert(await dispatch(deletePokemon(pokemon.id)))
+            }
+          >
+            <img
+              src="https://img.icons8.com/ios-filled/512/delete.png"
+              alt=""
+            />
+            <span
+              className={`${iconsStyles.tooltiptext} ${iconsStyles["tooltiptext-right"]}`}
+            >
+              <p>DELETE POKEMON</p>
+            </span>
+          </button>
           <div className={styles["section-group"]}>
             <div className={styles["detail-section"]}>
               <div
@@ -144,8 +165,14 @@ const PokemonDetail = (props) => {
             </div>
           </div>
         </div>
+      ) : pokemon.hasOwnProperty("message") ? (
+        <div className={`${styles["message-div"]} ${styles["not-found"]}`}>
+          <p>{pokemon.message}</p>
+        </div>
       ) : (
-        <p>Loading...</p>
+        <div className={styles["message-div"]}>
+          <p>Loading...</p>
+        </div>
       )}
     </div>
   );

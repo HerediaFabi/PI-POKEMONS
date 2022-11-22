@@ -11,13 +11,14 @@
   flex-wrap: wrap;
   text-align: center;
   justify-content: center;
+
   padding: 15px;
   border-radius: 15px;
   border: 1px solid #000;
   box-shadow: -5px 5px 0 #000;
 }
 
-h1 {
+.form-title {
   background-color: #24a2c6;
   border: 1px solid #000;
   border-radius: 15px;
@@ -29,25 +30,136 @@ h1 {
 }
 
 .form-section {
-  /* background-color: green; */
-  margin: 5px;
-  display: flex;
   width: 100%;
-  flex-wrap: wrap;
-  justify-content: space-around;
 }
 
 .section-title {
-  top: 8px;
-  position: relative;
-  background-color: #252525;
+  top: -11px;
+  position: absolute;
   padding: 0 10px;
+  background-color: #252525;
 }
 
 .section-border {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   width: 100%;
   padding: 15px 10px;
   border-radius: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #fff;
+}
+
+.section-border:hover {
+  box-shadow: 0 0 5px #fff;
+}
+
+.section-border:hover > .section-title {
+  text-shadow: 0 0 5px #fff;
+}
+
+.input-box {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 45%;
+  text-align: left;
+}
+
+.input-box input {
+  display: flex;
+  align-self: baseline;
+  background-color: #fff;
+  border: solid 1px #000;
+  box-shadow: 0 5px 0 #000;
+  border-radius: 15px;
+  font-size: 15px;
+  text-transform: capitalize;
+  margin: 10px 5px;
+  transition: 0.2s;
+  outline: none;
+  padding-left: 5px;
+}
+
+.input-box .placeholder {
+  color: #000;
+  position: absolute;
+  left: 0;
+  pointer-events: none;
+  padding-left: 5px;
+  margin: 10px 20px;
+  transition: 0.5s;
+}
+
+.input-box input[type="number"] + .placeholder {
+  margin: 10px 40px;
+}
+
+.input-box input:focus ~ .placeholder,
+.input-box input:valid ~ .placeholder {
+  color: #2ad1ff;
+  font-size: 0.9em;
+  transform: translateY(-20px);
+}
+
+input.name {
+  width: 150px;
+}
+
+input.image {
+  width: 160px;
+  text-transform: none;
+}
+
+input[type="number"] {
+  width: 120px;
+}
+
+.validation-message {
+  text-align: center;
+  color: #fff;
+  background-color: #f008;
+  border-radius: 15px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  padding: 0 10px;
+  width: fit-content;
+}
+
+.createBtn {
+  background-color: rgb(124, 243, 94);
+  padding: 10px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  width: 90%;
+  border-radius: 15px;
+  box-shadow: 0 5px 0 #000;
+  border: solid 1px #000;
+}
+
+.createBtn:hover {
+  filter: saturate(150%);
+}
+
+.createBtn:active {
+  filter: saturation(200%);
+  box-shadow: 0 1px #000;
+  transform: translateY(4px);
+}
+
+.createBtn:disabled {
+  color: #333;
+  background-color: #c03333;
+}
+
+.createBtn:disabled:active {
+  box-shadow: 0 5px 0 #000;
+  transform: none;
 }
 
 .checksContainer {
@@ -56,10 +168,6 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   padding: 10px 0;
-}
-
-.section-border {
-  border: 1px solid #fff;
 }
 
 label.check {
@@ -88,71 +196,7 @@ input[type="checkbox"] {
   display: none;
 }
 
-input {
-  text-align: center;
-  background-color: #fff;
-  border: solid 1px #000;
-  box-shadow: 0 5px 0 #000;
-  border-radius: 15px;
-  font-size: 15px;
-  text-transform: capitalize;
-  margin: 5px;
-  transition: 0.2s;
-}
-
-input#name {
-  width: 150px;
-}
-
-input#image {
-  width: 200px;
-  text-transform: none;
-}
-
-input[type="number"] {
-  width: 90px;
-}
-
-::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #555;
-  opacity: 1; /* Firefox */
-}
-
-:-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
-  color: #555;
-}
-
-::-ms-input-placeholder {
-  /* Microsoft Edge */
-  color: #555;
-}
-
-input:focus {
-  outline: none;
-  background-color: #7bf0ff;
-}
-
-#createBtn {
-  background-color: #ccc;
-  padding: 10px;
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  font-size: 15px;
-  font-weight: bold;
-  width: 90%;
-  border-radius: 15px;
-  box-shadow: 0 5px 0 #000;
-  border: solid 1px #000;
-}
-
-#createBtn:hover {
-  background-color: #fff;
-}
-
-#createBtn:active {
-  background-color: #999;
-  box-shadow: 0 1px #000;
-  transform: translateY(4px);
+.w-100 {
+  margin-top: 5px;
+  width: 100%;
 }

@@ -57,7 +57,7 @@
   background-color: #17285e;
 }
 
-.navbar a.navlink.active {
+.navbar .navlink.active {
   background-color: #0b61b3;
 }
 
