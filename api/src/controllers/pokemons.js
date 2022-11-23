@@ -2,55 +2,60 @@ const axios = require("axios");
 const { Pokemon, Type } = require("../db");
 
 const getAll = async () => {
-  // const info = await axios.get("https://pokeapi.co/api/v2/pokemon");
-  // const info2 = await axios.get(info.data.next);
+  try {
+    const info = await axios.get("https://pokeapi.co/api/v2/pokemon");
+    const info2 = await axios.get(info.data.next);
 
-  // const mergeResults = [...info.data.results, ...info2.data.results]; //? TRAER 40 POKEMONES
+    const mergeResults = [...info.data.results, ...info2.data.results]; //? TRAER 40 POKEMONES
 
-  // const arrayPromise = await mergeResults?.map((element) => {
-  //   return axios.get(element.url);
-  // });
-  // console.log(arrayPromise);
-  // const promiseData = await axios.all(arrayPromise);
-  // console.log("a");
-  // const pokeInfo = promiseData?.map((element) => element.data);
-  // const pokemons = pokeInfo?.map((element) => {
-  //   return {
-  //     id: element.id,
-  //     name: element.name,
-  //     image: element.sprites.other["official-artwork"].front_default,
-  //     attack: element.stats.find((el) => el.stat.name === "attack").base_stat,
-  //     types: element.types.map((element) => element.type.name),
-  //   };
-  // });
+    const arrayPromise = mergeResults?.map(async (element) => {
+      return await axios.get(element.url);
+    });
 
-  const dbPokemons = await Pokemon.findAll({
-    include: {
-      model: Type,
-      attributes: ["name"],
-      through: {
-        attributes: [],
+    const promiseData = await axios.all(arrayPromise);
+    console.log("a");
+    var APIPokemons = promiseData?.map((element) => {
+      return {
+        id: element.data.id,
+        name: element.data.name,
+        image: element.data.sprites.other["official-artwork"].front_default,
+        attack: element.data.stats.find((el) => el.stat.name === "attack")
+          .base_stat,
+        types: element.data.types.map((element) => element.type.name),
+      };
+    });
+
+    // let APIPokemons = [];
+
+    // for (let i = 0; i < arrayPromise.length; i++) {
+    //   let infoPokemon = await arrayPromise[i];
+    //   pokemon = {
+    //     id: infoPokemon.data.id,
+    //     name: infoPokemon.data.name,
+    //     image: infoPokemon.data.sprites.other["official-artwork"].front_default,
+    //     attack: infoPokemon.data.stats.find((el) => el.stat.name === "attack")
+    //       .base_stat,
+    //     types: infoPokemon.data.types.map((element) => element.type.name),
+    //   };
+    //   APIPokemons.push(pokemon);
+    //   console.log(pokemons.length);
+    // }
+
+    const dbPokemons = await Pokemon.findAll({
+      include: {
+        model: Type,
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        },
       },
-    },
-  });
-  // let pokemons = [];
+    });
 
-  // for (let i = 0; i < 5; i++) {
-  //   // let infoPokemon = await axios.get(urls[i]);
-  //   // console.log(infoPokemon);
-  //   // let types = [];
-  //   // for (const type of infoPokemon.data.types) {
-  //   //   console.log(type["type"].name);
-  //   // }
-  //   // console.log({
-  //   //   id: infoPokemon.data.id,
-  //   //   name: infoPokemon.data.name,
-  //   //   image: infoPokemon.data.sprites.other["official-artwork"].front_default,
-  //   //   types,
-  //   // });
-  //   // console.log(pokemons.length);
-  // }
-  return [...dbPokemons];
+    return [...APIPokemons, ...dbPokemons];
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 };
 
 const getPokemonById = async (id) => {
@@ -163,7 +168,7 @@ const deletePokemon = async (id) => {
 
   console.log(dbPokemon.length);
 
-  if (dbPokemon) await dbPokemon.destroy();
+  if (Object.keys(dbPokemon).length === 0) await dbPokemon.destroy();
 
   return;
 };

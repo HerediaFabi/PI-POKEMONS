@@ -7,7 +7,6 @@ import Navbar from "../Navbar/Navbar";
 const CreatePokemon = (props) => {
   const dispatch = useDispatch();
   const types = useSelector((state) => state.types);
-  // const [state, setState] =
   const [inputs, setInputs] = useState({
     name: "",
     image: "",
@@ -33,7 +32,7 @@ const CreatePokemon = (props) => {
   });
 
   useEffect(() => {
-    dispatch(getTypes());
+    if (types.length === 0) dispatch(getTypes());
   }, [dispatch]);
 
   const resetForm = () => {

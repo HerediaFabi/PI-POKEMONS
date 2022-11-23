@@ -46,22 +46,25 @@ const PokemonDetail = (props) => {
           >
             {pokemon.name}
           </p>
-          <button
-            className={`${iconsStyles.tooltip} ${styles["delete-button"]}`}
-            onClick={async () =>
-              alert(await dispatch(deletePokemon(pokemon.id)))
-            }
-          >
-            <img
-              src="https://img.icons8.com/ios-filled/512/delete.png"
-              alt=""
-            />
-            <span
-              className={`${iconsStyles.tooltiptext} ${iconsStyles["tooltiptext-right"]}`}
+          {pokemon.hasOwnProperty("createdAt") && (
+            <button
+              className={`${iconsStyles.tooltip} ${styles["delete-button"]}`}
+              onClick={async () =>
+                alert(await dispatch(deletePokemon(pokemon.id)))
+              }
             >
-              <p>DELETE POKEMON</p>
-            </span>
-          </button>
+              <img
+                src="https://img.icons8.com/ios-filled/512/delete.png"
+                alt=""
+              />
+              <span
+                className={`${iconsStyles.tooltiptext} ${iconsStyles["tooltiptext-right"]}`}
+              >
+                <p>DELETE POKEMON</p>
+              </span>
+            </button>
+          )}
+
           <div className={styles["section-group"]}>
             <div className={styles["detail-section"]}>
               <div

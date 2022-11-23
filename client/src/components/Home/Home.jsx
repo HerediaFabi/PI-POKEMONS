@@ -22,22 +22,23 @@ const Home = (props) => {
   const FirstPokemon = LastPokemon - 12;
   const filteredPokemons = useSelector((state) => state.filteredPokemons);
   const currentPokemons = filteredPokemons.slice(FirstPokemon, LastPokemon);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  //? COMPONENTE MODAL
+  // const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  //   const handleOpen = () => {
+  //     setModalIsOpen(true);
+  //   };
+
+  //   const handleClose = () => {
+  //     setModalIsOpen(false);
+  //   };
 
   const paginated = (page) => {
     setCurrentPage(page);
   };
 
-  const handleOpen = () => {
-    setModalIsOpen(true);
-  };
-
-  const handleClose = () => {
-    setModalIsOpen(false);
-  };
-
   useEffect(() => {
-    if (!pokemons.length) dispatch(getPokemons());
+    if (pokemons.length === 0) dispatch(getPokemons());
   }, [dispatch]);
 
   const recharge = () => {
