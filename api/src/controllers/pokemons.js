@@ -106,6 +106,8 @@ const createPokemon = async (body) => {
   const { name, hp, attack, defense, speed, height, weight, image, types } =
     body;
 
+  console.log(image);
+
   let pokemon = await Pokemon.findAll({ where: { name: name } });
 
   const data = {
@@ -116,7 +118,9 @@ const createPokemon = async (body) => {
     speed,
     height,
     weight,
-    image,
+    image: image
+      ? image
+      : "https://cdn-icons-png.flaticon.com/512/189/189665.png",
   };
   if (Object.keys(pokemon).length > 0)
     throw "The pokemon you are trying to create already exists in the database, please change the name";

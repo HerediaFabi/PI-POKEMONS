@@ -26,9 +26,6 @@ const checkData = (req, res, next) => {
   validateNumber(speed, "speed");
   validateArray(types, "types");
 
-  if (!image) image = "https://cdn-icons-png.flaticon.com/512/189/189665.png";
-  else console.log(image);
-
   if (errors.length) {
     for (let i = 0; i < errors.length; i++) {
       errors[i] = errors[i].replace("", " ");

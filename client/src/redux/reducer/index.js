@@ -69,6 +69,7 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case RECHARGE_ALL_POKEMONS:
+      console.log(state.allPokemons);
       return {
         ...state,
         filteredPokemons: state.allPokemons,
@@ -77,25 +78,25 @@ const rootReducer = (state = initialState, action) => {
     case A_Z:
       return {
         ...state,
-        filteredPokemons: alphabeticAsc(state.filteredPokemons),
+        filteredPokemons: alphabeticAsc([...state.filteredPokemons]),
       };
 
     case Z_A:
       return {
         ...state,
-        filteredPokemons: alphabeticDesc(state.filteredPokemons),
+        filteredPokemons: alphabeticDesc([...state.filteredPokemons]),
       };
 
     case MAX_ATTACK:
       return {
         ...state,
-        filteredPokemons: attackMax(state.filteredPokemons),
+        filteredPokemons: attackMax([...state.filteredPokemons]),
       };
 
     case MIN_ATTACK:
       return {
         ...state,
-        filteredPokemons: attackMin(state.filteredPokemons),
+        filteredPokemons: attackMin([...state.filteredPokemons]),
       };
 
     case DELETE_POKEMON:

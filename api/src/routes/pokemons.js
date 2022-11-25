@@ -29,6 +29,7 @@ pokemonRouter.get("/", async (req, res) => {
 });
 
 pokemonRouter.get("/:id", async (req, res) => {
+  if (!req.params.id) res.status(400).json({ error: "No id" });
   try {
     const result = await getPokemonById(req.params.id);
     res.status(200).json(result);
