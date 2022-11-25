@@ -75,18 +75,16 @@ const getPokemonById = async (id) => {
 const getPokemonByName = async (name) => {
   name = name.toLowerCase();
 
-  const dbPokemon = await Pokemon.findOne(
-    { where: { name: name } },
-    {
-      include: {
-        model: Type,
-        attributes: ["name"],
-        through: {
-          attributes: [],
-        },
+  const dbPokemon = await Pokemon.findOne({
+    where: { name: name },
+    include: {
+      model: Type,
+      attributes: ["name"],
+      through: {
+        attributes: [],
       },
-    }
-  );
+    },
+  });
   if (dbPokemon) return [dbPokemon];
 
   const apiPokemon = await axios.get(

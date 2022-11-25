@@ -169,7 +169,6 @@ const Home = (props) => {
               </select>
             </div>
           </div>
-          {console.log({ filteredPokemons })}
           {loader === false ? (
             filteredPokemons[0].hasOwnProperty("error") ? (
               filteredPokemons[0].code === 408 ? (
@@ -184,7 +183,6 @@ const Home = (props) => {
               )
             ) : (
               <div className={styles.pokemons}>
-                {console.log(filteredPokemons)}
                 <Paginated
                   key="paginated1"
                   array={filteredPokemons}

@@ -59,17 +59,16 @@ const rootReducer = (state = initialState, action) => {
     case GET_DB_POKEMONS:
       return {
         ...state,
-        filteredPokemons: dbPokemons(state.allPokemons),
+        filteredPokemons: dbPokemons([...state.allPokemons]),
       };
 
     case GET_API_POKEMONS:
       return {
         ...state,
-        filteredPokemons: apiPokemons(state.allPokemons),
+        filteredPokemons: apiPokemons([...state.allPokemons]),
       };
 
     case RECHARGE_ALL_POKEMONS:
-      console.log(state.allPokemons);
       return {
         ...state,
         filteredPokemons: state.allPokemons,

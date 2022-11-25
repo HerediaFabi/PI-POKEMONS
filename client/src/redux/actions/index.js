@@ -44,6 +44,7 @@ export const getPokemonByName = (name) => {
       const info = await axios.get(
         `http://localhost:3001/pokemons?name=${name}`
       );
+      console.log(info.data);
       dispatch({ type: GET_POKEMON_BY_NAME, payload: info.data });
     } catch (error) {
       dispatch({ type: GET_POKEMON_BY_NAME, payload: error.response.data });
