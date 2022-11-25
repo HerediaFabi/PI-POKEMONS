@@ -12,6 +12,8 @@ import {
   MAX_ATTACK,
   MIN_ATTACK,
   DELETE_POKEMON,
+  TOGGLE_MODAL,
+  TOGGLE_LOADER,
 } from "../actions/index";
 
 import {
@@ -29,6 +31,7 @@ const initialState = {
   pokemonDetail: {},
   types: [],
   modal: false,
+  loader: true,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -38,6 +41,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allPokemons: action.payload,
         filteredPokemons: action.payload,
+        loader: false,
       };
 
     case GET_POKEMON_BY_ID:
@@ -97,8 +101,17 @@ const rootReducer = (state = initialState, action) => {
     case DELETE_POKEMON:
       return {
         ...state,
-        pokemonDetail: { message: "Pokemon not found" },
+        filteredPokemons: state.filteredPokemons.filter(
+          (pokemon) => pokemon.id !== action.payload
+        ),
+        pokemonDetail: { error: "Pokemon not found" },
       };
+
+    case TOGGLE_MODAL:
+      return { ...state, modal: !state.modal };
+
+    case TOGGLE_LOADER:
+      return { ...state, loader: !state.loader };
 
     default:
       return { ...state };

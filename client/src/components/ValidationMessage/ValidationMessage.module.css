@@ -1,0 +1,14 @@
+.message-box {
+  text-align: center;
+  margin-inline: 2px;
+  width: 100%;
+}
+
+.validation-message {
+  background-color: #f009;
+  color: #fff;
+  border-radius: 5px;
+  display: inline-block;
+  width: 90%;
+  margin-bottom: 10px;
+}

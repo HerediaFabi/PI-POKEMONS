@@ -13,11 +13,17 @@ export const MIN_ATTACK = "MIX_ATTACK";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const RECHARGE_ALL_POKEMONS = "RECHARGE_ALL_POKEMONS";
 export const DELETE_POKEMON = "DELETE_POKEMON";
+export const TOGGLE_MODAL = "TOGGLE_MODAL";
+export const TOGGLE_LOADER = "TOGGLE_LOADER";
 
 export const getPokemons = () => {
   return async function (dispatch) {
-    const info = await axios.get(`http://localhost:3001/pokemons`);
-    dispatch({ type: GET_POKEMONS, payload: info.data });
+    try {
+      const info = await axios.get(`http://localhost:3001/pokemons`);
+      dispatch({ type: GET_POKEMONS, payload: info.data });
+    } catch (error) {
+      dispatch({ type: GET_POKEMONS, payload: error.response.data });
+    }
   };
 };
 
@@ -34,8 +40,14 @@ export const getPokemonById = (id) => {
 
 export const getPokemonByName = (name) => {
   return async function (dispatch) {
-    let info = await axios.get(`http://localhost:3001/pokemons?name=${name}`);
-    dispatch({ type: GET_POKEMON_BY_NAME, payload: info.data });
+    try {
+      const info = await axios.get(
+        `http://localhost:3001/pokemons?name=${name}`
+      );
+      dispatch({ type: GET_POKEMON_BY_NAME, payload: info.data });
+    } catch (error) {
+      dispatch({ type: GET_POKEMON_BY_NAME, payload: error.response.data });
+    }
   };
 };
 
@@ -62,12 +74,26 @@ export const postPokemon = (data) => {
   };
 };
 
+export const putPokemon = (id, data) => {
+  return async function () {
+    try {
+      const response = await axios.put(
+        "http://localhost:3001/pokemons/" + id,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return error.response.data;
+    }
+  };
+};
+
 export const deletePokemon = (id) => {
   return async function (dispatch) {
     try {
       await axios.delete("http://localhost:3001/pokemons/" + id);
       dispatch({ type: DELETE_POKEMON });
-      return "Pokemon deleted";
     } catch (error) {
       return "ERROR";
     }
@@ -116,7 +142,6 @@ export const alphabeticOrder = (value) => {
         break;
 
       default:
-        dispatch({ type: A_Z });
         break;
     }
   };
@@ -134,10 +159,19 @@ export const statsOrder = (value) => {
         break;
 
       default:
-        dispatch({ type: MAX_ATTACK });
         break;
     }
   };
 };
 
-// export const
+export const toggleModal = () => {
+  return function (dispatch) {
+    dispatch({ type: TOGGLE_MODAL });
+  };
+};
+
+export const toggleLoader = () => {
+  return function (dispatch) {
+    dispatch({ type: TOGGLE_LOADER });
+  };
+};

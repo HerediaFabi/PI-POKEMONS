@@ -1,29 +1,23 @@
 const checkData = (req, res, next) => {
-  const { name, hp, attack, defense, speed, height, weight, image, types } =
-    req.body;
+  const { name, hp, attack, defense, speed, height, weight, types } = req.body;
+
+  let { image } = req.body;
 
   const errors = [];
 
-  console.log(image);
-
-  const addError = (variableName) => {
-    errors.push(variableName);
-  };
-
   const validateString = (string, variableName) => {
-    if (!string) addError(variableName);
+    if (!string) errors.push(variableName);
   };
 
   const validateNumber = (number, variableName) => {
-    if (!number || Math.sign(number) === -1) addError(variableName);
+    if (!number || Math.sign(number) === -1) errors.push(variableName);
   };
 
   const validateArray = (array, variableName) => {
-    if (array === undefined || !array.length) addError(variableName);
+    if (array === undefined || !array.length) errors.push(variableName);
   };
 
   validateString(name, "name");
-  // validateString(image, "image");
   validateNumber(height, "height");
   validateNumber(weight, "weight");
   validateNumber(hp, "hp");
@@ -31,6 +25,9 @@ const checkData = (req, res, next) => {
   validateNumber(defense, "defense");
   validateNumber(speed, "speed");
   validateArray(types, "types");
+
+  if (!image) image = "https://cdn-icons-png.flaticon.com/512/189/189665.png";
+  else console.log(image);
 
   if (errors.length) {
     for (let i = 0; i < errors.length; i++) {

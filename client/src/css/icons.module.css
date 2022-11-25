@@ -299,9 +299,16 @@ div.icon img {
 
 .tooltip .tooltiptext-right {
   bottom: 0;
+  top: 0;
   margin-left: 0;
-  top: -5px;
-  left: 50%;
+  left: 20%;
+}
+
+.tooltip .tooltiptext-left {
+  bottom: 0;
+  top: 0;
+  margin-right: 0;
+  left: -115%;
 }
 
 .tooltip:hover .tooltiptext {

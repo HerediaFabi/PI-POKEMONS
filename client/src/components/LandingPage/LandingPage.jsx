@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getPokemons } from "../../redux/actions/index";
 import styles from "./LandingPage.module.css";
 import { Link } from "react-router-dom";
 
 const LandingPage = (props) => {
   const dispatch = useDispatch();
+  const pokemons = useSelector((state) => state.allPokemons);
 
   useEffect(() => {
-    dispatch(getPokemons());
+    if (pokemons.lenght === 0) dispatch(getPokemons());
   }, [dispatch]);
 
   return (

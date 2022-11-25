@@ -1,0 +1,52 @@
+.input-box {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 45%;
+  text-align: left;
+}
+
+.input-box input {
+  display: flex;
+  align-self: baseline;
+  background-color: #fff;
+  border: solid 1px #000;
+  box-shadow: 0 5px 0 #000;
+  border-radius: 15px;
+  font-size: 15px;
+  text-transform: lowercase;
+  margin: 10px 5px;
+  transition: 0.2s;
+  outline: none;
+  padding-left: 5px;
+}
+
+.input-box .placeholder {
+  color: #000;
+  position: absolute;
+  left: 0;
+  pointer-events: none;
+  padding-left: 5px;
+  margin: 10px 20px;
+  transition: 0.5s;
+}
+
+.input-box input[type="number"] + .placeholder {
+  margin: 10px 40px;
+}
+
+.input-box input:focus ~ .placeholder,
+.input-box input:valid ~ .placeholder {
+  color: #2ad1ff;
+  font-size: 0.9em;
+  transform: translateY(-20px);
+}
+
+input[type="text"] {
+  width: 150px;
+}
+
+input[type="number"] {
+  width: 120px;
+}

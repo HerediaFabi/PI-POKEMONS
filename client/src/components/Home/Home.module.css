@@ -18,6 +18,14 @@
   align-items: center;
 }
 
+.disabled {
+  pointer-events: none;
+}
+
+.enabled {
+  pointer-events: all;
+}
+
 .filters {
   margin-top: 5px;
   display: flex;
@@ -26,7 +34,6 @@
 
 .filters div {
   margin: 5px;
-  /* padding: 5px; */
   border-radius: 5px;
 }
 
@@ -45,8 +52,6 @@
   box-shadow: 0 5px 0 #000;
   top: -2px;
   position: relative;
-  /* text-shadow: 1px 0 #000, -1px 0 #000, 0 1px #000, 0 -1px #000, 1px 1px #000,
-    -1px -1px #000, 1px -1px #000, -1px 1px #000; */
 }
 
 ::placeholder {
@@ -85,70 +90,4 @@
   background-color: #ff5470;
   box-shadow: 0 0 25px #ff5470;
   outline: none;
-}
-
-.wrapper {
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  width: 100px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.pokeball {
-  width: 60px;
-  height: 60px;
-  color: #000;
-  background-color: #fff;
-  border-radius: 50%;
-  position: relative;
-  overflow: hidden;
-  border: 3px solid;
-  animation: frames 0.8s linear 0s infinite;
-}
-
-.pokeball:after {
-  content: "";
-  position: absolute;
-  width: 60px;
-  height: 30px;
-  background-color: red;
-  border-bottom: 4px solid;
-  top: -4px;
-}
-
-.pokeball:before {
-  content: "";
-  position: absolute;
-  background-color: #fff;
-  width: 10px;
-  height: 10px;
-  border: 4px solid;
-  border-radius: 50%;
-  bottom: 18px;
-  right: 18px;
-  z-index: 1;
-}
-
-/* AnimationFrames */
-@keyframes frames {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-span.loadingText {
-  margin-top: 1rem;
-  animation: text 3s ease-in-out infinite;
-}
-
-@keyframes text {
-  50% {
-    color: transparent;
-  }
 }

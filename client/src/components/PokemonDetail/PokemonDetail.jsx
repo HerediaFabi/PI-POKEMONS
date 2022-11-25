@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./PokemonDetail.module.css";
 import iconsStyles from "../../css/icons.module.css";
 import cardStyles from "../../css/card.module.css";
@@ -6,34 +6,68 @@ import {
   getPokemonById,
   cleanDetail,
   deletePokemon,
+  toggleModal,
 } from "../../redux/actions/index";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../Navbar/Navbar";
+import Loader from "../Loader/Loader";
+import Modal from "../Modal/Modal";
+import { Link } from "react-router-dom";
 
 const PokemonDetail = (props) => {
   const dispatch = useDispatch();
-  console.log(props);
+  const modal = useSelector((state) => state.modal);
+  const [modalValues, setModalValues] = useState({
+    message: "",
+    btnYes: "",
+    btnYesAction: "",
+    btnNo: "",
+    btnNoAction: "",
+  });
+
+  useEffect(() => {
+    dispatch(getPokemonById(props.match.params.id));
+    return () => {
+      if (modal) dispatch(toggleModal());
+    };
+  }, [dispatch]);
 
   const capitalize = (string) => {
     return string.charAt(0).toUpperCase().concat(string.slice(1));
   };
 
-  useEffect(() => {
-    dispatch(getPokemonById(props.match.params.id));
-    return () => {
-      dispatch(cleanDetail());
-    };
-  }, [dispatch]);
+  const showModalFunction = (
+    message,
+    btnYes,
+    btnYesAction,
+    btnNo,
+    btnNoAction
+  ) => {
+    if (!modal) dispatch(toggleModal());
+    setModalValues({
+      message: message,
+      btnYes: btnYes,
+      btnYesAction: btnYesAction,
+      btnNo: btnNo,
+      btnNoAction: btnNoAction,
+    });
+  };
 
   const pokemon = useSelector((state) => state.pokemonDetail);
-  console.log(pokemon);
 
   return (
     <div className={styles.detail}>
       <Navbar />
-      {Object.keys(pokemon).length !== 0 &&
-      !pokemon.hasOwnProperty("message") ? (
+      {console.log(pokemon)}
+      <Modal
+        status={modal}
+        message={modalValues.message}
+        btnYes={modalValues.btnYes}
+        btnYesAction={modalValues.btnYesAction}
+        btnNo={modalValues.btnNo}
+        btnNoAction={modalValues.btnNoAction}
+      />
+      {Object.keys(pokemon).length !== 0 && !pokemon.hasOwnProperty("error") ? (
         <div className={`${styles["detail-card"]} ${cardStyles.card}`}>
           <p
             className={`${styles["detail-name"]} ${
@@ -47,22 +81,53 @@ const PokemonDetail = (props) => {
             {pokemon.name}
           </p>
           {pokemon.hasOwnProperty("createdAt") && (
-            <button
-              className={`${iconsStyles.tooltip} ${styles["delete-button"]}`}
-              onClick={async () =>
-                alert(await dispatch(deletePokemon(pokemon.id)))
-              }
-            >
-              <img
-                src="https://img.icons8.com/ios-filled/512/delete.png"
-                alt=""
-              />
-              <span
-                className={`${iconsStyles.tooltiptext} ${iconsStyles["tooltiptext-right"]}`}
+            <div className={styles["db-icons"]}>
+              <button
+                className={`${iconsStyles.tooltip} ${styles["button"]} ${styles["delete-button"]}`}
+                onClick={() =>
+                  showModalFunction(
+                    `Are you sure you want to delete ${capitalize(
+                      pokemon.name
+                    )}?`,
+                    true,
+                    () => {
+                      dispatch(deletePokemon(pokemon.id));
+                      dispatch(toggleModal());
+                    },
+
+                    true,
+                    () => {
+                      dispatch(toggleModal());
+                    }
+                  )
+                }
               >
-                <p>DELETE POKEMON</p>
-              </span>
-            </button>
+                <img
+                  src="https://img.icons8.com/ios-filled/512/delete.png"
+                  alt=""
+                />
+                <span
+                  className={`${iconsStyles.tooltiptext} ${iconsStyles["tooltiptext-right"]}`}
+                >
+                  <p>DELETE</p>
+                </span>
+              </button>
+              <button
+                className={`${iconsStyles.tooltip} ${styles["button"]} ${styles["update-button"]}`}
+              >
+                <Link to={`/updatePokemon/${pokemon.id}`}>
+                  <img
+                    src="https://img.icons8.com/metro/512/pencil.png"
+                    alt=""
+                  />
+                  <span
+                    className={`${iconsStyles.tooltiptext} ${iconsStyles["tooltiptext-left"]}`}
+                  >
+                    <p>UPDATE</p>
+                  </span>
+                </Link>
+              </button>
+            </div>
           )}
 
           <div className={styles["section-group"]}>
@@ -168,14 +233,12 @@ const PokemonDetail = (props) => {
             </div>
           </div>
         </div>
-      ) : pokemon.hasOwnProperty("message") ? (
-        <div className={`${styles["message-div"]} ${styles["not-found"]}`}>
-          <p>{pokemon.message}</p>
+      ) : pokemon.hasOwnProperty("error") ? (
+        <div className={styles["not-found"]}>
+          <p>{pokemon.error}</p>
         </div>
       ) : (
-        <div className={styles["message-div"]}>
-          <p>Loading...</p>
-        </div>
+        <Loader />
       )}
     </div>
   );

@@ -2,65 +2,42 @@ const axios = require("axios");
 const { Pokemon, Type } = require("../db");
 
 const getAll = async () => {
-  try {
-    const info = await axios.get("https://pokeapi.co/api/v2/pokemon");
-    const info2 = await axios.get(info.data.next);
+  const info = await axios.get("https://pokeapi.co/api/v2/pokemon");
+  const info2 = await axios.get(info.data.next);
 
-    const mergeResults = [...info.data.results, ...info2.data.results]; //? TRAER 40 POKEMONES
+  const mergeResults = [...info.data.results, ...info2.data.results]; //? TRAER 40 POKEMONES
 
-    const arrayPromise = mergeResults?.map(async (element) => {
-      return await axios.get(element.url);
-    });
+  const arrayPromise = mergeResults?.map((element) => {
+    return axios.get(element.url);
+  });
 
-    const promiseData = await axios.all(arrayPromise);
-    console.log("a");
-    var APIPokemons = promiseData?.map((element) => {
-      return {
-        id: element.data.id,
-        name: element.data.name,
-        image: element.data.sprites.other["official-artwork"].front_default,
-        attack: element.data.stats.find((el) => el.stat.name === "attack")
-          .base_stat,
-        types: element.data.types.map((element) => element.type.name),
-      };
-    });
+  const promiseData = await axios.all(arrayPromise);
+  const APIPokemons = promiseData?.map((element) => {
+    return {
+      id: element.data.id,
+      name: element.data.name,
+      image: element.data.sprites.other["official-artwork"].front_default,
+      attack: element.data.stats.find((el) => el.stat.name === "attack")
+        .base_stat,
+      types: element.data.types.map((element) => element.type.name),
+    };
+  });
 
-    // let APIPokemons = [];
-
-    // for (let i = 0; i < arrayPromise.length; i++) {
-    //   let infoPokemon = await arrayPromise[i];
-    //   pokemon = {
-    //     id: infoPokemon.data.id,
-    //     name: infoPokemon.data.name,
-    //     image: infoPokemon.data.sprites.other["official-artwork"].front_default,
-    //     attack: infoPokemon.data.stats.find((el) => el.stat.name === "attack")
-    //       .base_stat,
-    //     types: infoPokemon.data.types.map((element) => element.type.name),
-    //   };
-    //   APIPokemons.push(pokemon);
-    //   console.log(pokemons.length);
-    // }
-
-    const dbPokemons = await Pokemon.findAll({
-      include: {
-        model: Type,
-        attributes: ["name"],
-        through: {
-          attributes: [],
-        },
+  const dbPokemons = await Pokemon.findAll({
+    include: {
+      model: Type,
+      attributes: ["name"],
+      through: {
+        attributes: [],
       },
-    });
+    },
+  });
 
-    return [...APIPokemons, ...dbPokemons];
-  } catch (error) {
-    console.log(error);
-    return error;
-  }
+  const allPokemons = [...APIPokemons, ...dbPokemons];
+  return allPokemons;
 };
 
 const getPokemonById = async (id) => {
-  try {
-  } catch (error) {}
   if (isNaN(id)) {
     const dbPokemon = await Pokemon.findByPk(id, {
       include: {
@@ -97,14 +74,10 @@ const getPokemonById = async (id) => {
 
 const getPokemonByName = async (name) => {
   name = name.toLowerCase();
-  const dbPokemons = await Pokemon.findAll();
-  const coincidence = await dbPokemons.find(
-    (pokemon) => pokemon.name.toLowerCase() === name
-  );
 
-  let dbPokemon;
-  if (coincidence) {
-    dbPokemon = await Pokemon.findByPk(coincidence.dataValues.id, {
+  const dbPokemon = await Pokemon.findOne(
+    { where: { name: name } },
+    {
       include: {
         model: Type,
         attributes: ["name"],
@@ -112,17 +85,13 @@ const getPokemonByName = async (name) => {
           attributes: [],
         },
       },
-    });
-    console.log(dbPokemon);
-    return [dbPokemon];
-  }
+    }
+  );
+  if (dbPokemon) return [dbPokemon];
 
   const apiPokemon = await axios.get(
     "https://pokeapi.co/api/v2/pokemon/" + name
   );
-
-  console.log(apiPokemon);
-
   const pokemon = {
     id: apiPokemon.data.id,
     name: apiPokemon.data.name,
@@ -137,7 +106,8 @@ const createPokemon = async (body) => {
   const { name, hp, attack, defense, speed, height, weight, image, types } =
     body;
 
-  console.log({ image });
+  let pokemon = await Pokemon.findAll({ where: { name: name } });
+
   const data = {
     name,
     hp,
@@ -146,17 +116,34 @@ const createPokemon = async (body) => {
     speed,
     height,
     weight,
-    image: image
-      ? image
-      : "https://cdn-icons-png.flaticon.com/512/189/189665.png",
+    image,
   };
-  let newPokemon = await Pokemon.create(data);
+  if (Object.keys(pokemon).length > 0)
+    throw "The pokemon you are trying to create already exists in the database, please change the name";
 
+  let apiPokemon = null;
+  try {
+    apiPokemon = await axios.get("https://pokeapi.co/api/v2/pokemon/" + name);
+  } catch (error) {}
+
+  if (apiPokemon)
+    throw "The pokemon you are trying to create already exists in the API, please change the name";
+
+  const newPokemon = await Pokemon.create(data);
   types ? newPokemon.addTypes(types) : newPokemon.addTypes(19);
 };
 
 const deletePokemon = async (id) => {
-  const dbPokemon = await Pokemon.findByPk(id, {
+  Pokemon.destroy({
+    where: {
+      id: id,
+    },
+  });
+  return id;
+};
+
+const updatePokemon = async (id, data) => {
+  const pokemon = await Pokemon.findByPk(id, {
     include: {
       model: Type,
       attributes: ["name"],
@@ -166,11 +153,19 @@ const deletePokemon = async (id) => {
     },
   });
 
-  console.log(dbPokemon.length);
-
-  if (Object.keys(dbPokemon).length === 0) await dbPokemon.destroy();
-
-  return;
+  await pokemon.set({
+    name: data.name,
+    image: data.image,
+    height: data.height,
+    weight: data.weight,
+    hp: data.hp,
+    attack: data.attack,
+    defense: data.defense,
+    speed: data.speed,
+  });
+  await pokemon.setTypes(data.types);
+  await pokemon.save();
+  return pokemon;
 };
 
 module.exports = {
@@ -179,4 +174,5 @@ module.exports = {
   getPokemonByName,
   createPokemon,
   deletePokemon,
+  updatePokemon,
 };

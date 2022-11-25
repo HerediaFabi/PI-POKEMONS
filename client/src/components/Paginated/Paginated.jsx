@@ -16,6 +16,20 @@ const Paginated = ({ paginated, array, name, currentPage }) => {
 
   return (
     <div className={styles.paginated}>
+      <div className={styles.page}>
+        <input
+          onChange={() => {
+            paginated(currentPage - 1);
+          }}
+          type="radio"
+          name={name}
+          id="previous"
+          disabled={currentPage === 1}
+          checked={false}
+          className={styles.radio}
+        />
+        <label htmlFor="previous">&lt;</label>
+      </div>
       {pages.map((page) => {
         return (
           <div key={page} className={styles.page}>
@@ -33,6 +47,20 @@ const Paginated = ({ paginated, array, name, currentPage }) => {
           </div>
         );
       })}
+      <div className={styles.page}>
+        <input
+          onChange={() => {
+            paginated(currentPage + 1);
+          }}
+          type="radio"
+          name={name}
+          id="next"
+          disabled={currentPage === pages.length}
+          checked={false}
+          className={styles.radio}
+        />
+        <label htmlFor="next">&gt;</label>
+      </div>
     </div>
   );
 

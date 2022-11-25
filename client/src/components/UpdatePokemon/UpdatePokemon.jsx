@@ -1,69 +1,62 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getTypes, postPokemon } from "../../redux/actions/index";
-import styles from "./CreatePokemon.module.css";
+import {
+  getTypes,
+  getPokemonById,
+  putPokemon,
+} from "../../redux/actions/index";
+import styles from "./UpdatePokemon.module.css";
 import Navbar from "../Navbar/Navbar";
 import Input from "../Input/Input";
 import InputCheck from "../InputCheck/InputCheck";
 import ValidationMessage from "../ValidationMessage/ValidationMessage";
 import Modal from "../Modal/Modal";
+import Loader from "../Loader/Loader";
 
-const CreatePokemon = (props) => {
+const UpdatePokemon = (props) => {
   const dispatch = useDispatch();
   const types = useSelector((state) => state.types);
   const modal = useSelector((state) => state.modal);
-  const [inputs, setInputs] = useState({
-    name: "",
-    image: "",
-    height: "",
-    weight: "",
-    hp: "",
-    attack: "",
-    defense: "",
-    speed: "",
-    types: "",
-  });
-  const [errors, setErrors] = useState({
-    name: "",
-    // image: "",
-    height: "",
-    weight: "",
-    hp: "",
-    attack: "",
-    defense: "",
-    speed: "",
-    types: "",
-  });
+  const pokemon = useSelector((state) => state.pokemonDetail);
+  console.log(pokemon);
+
+  const [inputs, setInputs] = useState({});
 
   useEffect(() => {
     if (types.length === 0) dispatch(getTypes());
+    if (Object.keys(pokemon).length === 0)
+      dispatch(getPokemonById(props.match.params.id));
   }, [dispatch]);
 
-  const resetForm = () => {
-    setInputs({
-      name: "",
-      image: "",
-      height: "",
-      weight: "",
-      hp: "",
-      attack: "",
-      defense: "",
-      speed: "",
-      types: "",
-    });
+  //Si entra sin pasar x el detalle
+  if (
+    Object.keys(pokemon).length > 0 &&
+    Object.keys(inputs).length === 0 &&
+    Object.keys(types).length !== 0
+  ) {
+    const typeNames = [];
 
-    setErrors({
-      name: "",
-      // image: "",
-      height: "",
-      weight: "",
-      hp: "",
-      attack: "",
-      defense: "",
-      speed: "",
-      types: "",
+    for (let i = 0; i < pokemon.types.length; i++) {
+      typeNames.push(types.find((t) => t.name === pokemon.types[i].name));
+    }
+
+    const ids = typeNames.map((t) => t.id.toString());
+
+    console.log(ids);
+
+    setInputs({
+      name: pokemon.name,
+      image: pokemon.image,
+      height: pokemon.height,
+      weight: pokemon.weight,
+      hp: pokemon.hp,
+      attack: pokemon.attack,
+      defense: pokemon.defense,
+      speed: pokemon.speed,
+      types: ids,
     });
-  };
+  }
+  const [errors, setErrors] = useState({});
 
   const capitalize = (string) =>
     string.charAt(0).toUpperCase().concat(string.slice(1));
@@ -186,16 +179,15 @@ const CreatePokemon = (props) => {
   };
 
   const handleClick = async () => {
-    alert(await dispatch(postPokemon(inputs)));
-    resetForm();
+    alert(await dispatch(putPokemon(pokemon.id, inputs)));
   };
 
-  return (
+  return Object.keys(pokemon).length !== 0 ? (
     <div className={styles["create-pokemon"]}>
       <Navbar />
       <Modal state={modal} />
       <div className={styles.form}>
-        <h1 className={`${styles["form-title"]}`}>Create pokemon</h1>
+        <h1 className={`${styles["form-title"]}`}>Update pokemon</h1>
         <div className={styles["form-section"]}>
           <div className={styles["section-border"]}>
             <label htmlFor="" className={styles["section-title"]}>
@@ -297,12 +289,14 @@ const CreatePokemon = (props) => {
             onClick={(e) => handleClick(e)}
             className={styles.createBtn}
           >
-            Create
+            Update
           </button>
         </div>
       </div>
     </div>
+  ) : (
+    <Loader />
   );
 };
 
-export default CreatePokemon;
+export default UpdatePokemon;

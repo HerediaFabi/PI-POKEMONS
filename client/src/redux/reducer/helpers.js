@@ -2,7 +2,9 @@ export const dbPokemons = (array) => {
   const filteredArray = array.filter((pokemon) =>
     pokemon.hasOwnProperty("createdAt")
   );
-  return filteredArray.length > 0 ? filteredArray : array;
+  return filteredArray.length > 0
+    ? filteredArray
+    : [{ error: "There are no pokemons in the database", code: 404 }];
 };
 
 export const apiPokemons = (array) => {
@@ -24,7 +26,6 @@ export const alphabeticDesc = (array) =>
   });
 
 export const attackMin = (array) => {
-  console.log(array);
   return array.sort((a, b) => {
     return a.attack - b.attack;
   });

@@ -5,8 +5,6 @@ import cardStyles from "../../css/card.module.css";
 import { Link } from "react-router-dom";
 
 const PokemonCard = (props) => {
-  console.log(props);
-
   const cardType = iconsStyles[props.mainType];
 
   return (
@@ -17,11 +15,12 @@ const PokemonCard = (props) => {
         {props.types.map((t) => {
           return (
             <div
-              class={`${iconsStyles.icon} ${iconsStyles[t.name ? t.name : t]} ${
-                iconsStyles.tooltip
-              }`}
+              key={t}
+              className={`${iconsStyles.icon} ${
+                iconsStyles[t.name ? t.name : t]
+              } ${iconsStyles.tooltip}`}
             >
-              <span class={iconsStyles.tooltiptext}>
+              <span className={iconsStyles.tooltiptext}>
                 {(t.name ? t.name : t)
                   .charAt(0)
                   .toUpperCase()
