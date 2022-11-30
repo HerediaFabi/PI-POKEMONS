@@ -170,6 +170,18 @@ const updatePokemon = async (id, data) => {
   return pokemon;
 };
 
+const filtrar = async (filter) => {
+  const filteredPokemons = await Pokemon.findAll({
+    include: {
+      model: Type,
+      attributes: ["name"],
+      where: { name: filter },
+    },
+  });
+
+  return filteredPokemons;
+};
+
 module.exports = {
   getAll,
   getPokemonById,
@@ -177,4 +189,5 @@ module.exports = {
   createPokemon,
   deletePokemon,
   updatePokemon,
+  filtrar,
 };
