@@ -6,10 +6,22 @@ const {
   createPokemon,
   deletePokemon,
   updatePokemon,
+  filtrar,
 } = require("../controllers/pokemons");
 const checkData = require("../middlewares/checkData");
 
 const pokemonRouter = Router();
+
+pokemonRouter.get("/filter", async (req, res) => {
+  const {filter} = req.body
+  try {
+    const resultado = filtrar(filter) 
+res.status(200).send(resultado)
+
+  } catch (error) {
+    
+  }
+})
 
 pokemonRouter.get("/", async (req, res) => {
   const { name } = req.query;
