@@ -14,8 +14,13 @@ div .icon {
   transition: 200ms all;
 }
 
+.icon.types {
+  background-image: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/8a338ef9-a14e-4c93-989b-b510d7b9bad7/dedsu40-c80a23d1-3179-4a89-8f1f-a1599b806335.png/v1/fill/w_1030,h_500,strp/pokemon_type_icons___vector_by_lugia_sea_dedsu40-fullview.png);
+  background-size: 780%;
+}
+
 .detail-icon {
-  background-color: #333;
+  /* background-color: #333; */
   margin: 0px;
   padding: 0;
   width: 5rem;
@@ -39,87 +44,104 @@ div.icon img {
 }
 
 .icon.bug {
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/3c/Pok%C3%A9mon_Bug_Type_Icon.svg);
   background-color: #92bc2c;
+  background-position-y: 50%;
+  background-position-x: 0.5%;
 }
 
 .icon.dark {
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/0/09/Pok%C3%A9mon_Dark_Type_Icon.svg);
+  background-position-y: 99%;
+  background-position-x: 80%;
   background-color: #595761;
 }
 
 .icon.dragon {
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/a/a6/Pok%C3%A9mon_Dragon_Type_Icon.svg);
+  background-position-y: 99%;
+  background-position-x: 60%;
   background-color: #0c69c8;
 }
 
 .icon.electric {
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/a/a9/Pok%C3%A9mon_Electric_Type_Icon.svg);
+  background-position-y: 99.5%;
+  background-position-x: 0.5%;
   background-color: #f2d94e;
 }
 
 .icon.fire {
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/5/56/Pok%C3%A9mon_Fire_Type_Icon.svg);
+  background-position-y: 50%;
+  background-position-x: 60%;
   background-color: #fba54c;
 }
 
 .icon.fairy {
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/0/08/Pok%C3%A9mon_Fairy_Type_Icon.svg);
+  background-position-y: 99%;
+  background-position-x: 99.5%;
   background-color: #ee90e6;
 }
 
 .icon.fighting {
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Pok%C3%A9mon_Fighting_Type_Icon.svg);
+  background-position-y: 1%;
+  background-position-x: 20.5%;
   background-color: #d3425f;
 }
 
 .icon.flying {
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/e/e0/Pok%C3%A9mon_Flying_Type_Icon.svg);
   background-color: #a1bbec;
+  background-position-y: 0.5%;
+  background-position-x: 40%;
 }
 
 .icon.ghost {
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/a/a0/Pok%C3%A9mon_Ghost_Type_Icon.svg);
+  background-position-y: 50%;
+  background-position-x: 20%;
   background-color: #5f6dbc;
 }
 
 .icon.grass {
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/f/f6/Pok%C3%A9mon_Grass_Type_Icon.svg);
+  background-position-y: 50%;
+  background-position-x: 99.5%;
   background-color: #5fbd58;
 }
 
 .icon.ground {
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/8/8d/Pok%C3%A9mon_Ground_Type_Icon.svg);
+  background-position-y: 0.5%;
+  background-position-x: 80%;
   background-color: #da7c4d;
 }
 
 .icon.ice {
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/8/88/Pok%C3%A9mon_Ice_Type_Icon.svg);
+  background-position-y: 99.5%;
+  background-position-x: 40%;
   background-color: #75d0c1;
 }
 
 .icon.normal {
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/a/aa/Pok%C3%A9mon_Normal_Type_Icon.svg);
+  background-position-y: 1%;
+  background-position-x: 0.5%;
   background-color: #a0a29f;
 }
 
 .icon.poison {
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/c/c4/Pok%C3%A9mon_Poison_Type_Icon.svg);
+  background-position-y: 0.5%;
+  background-position-x: 60%;
   background-color: #b763cf;
 }
 
 .icon.psychic {
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/a/ab/Pok%C3%A9mon_Psychic_Type_Icon.svg);
+  background-position-y: 99%;
+  background-position-x: 20.5%;
   background-color: #fa8581;
 }
 
 .icon.rock {
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/bb/Pok%C3%A9mon_Rock_Type_Icon.svg);
+  background-position-y: 1%;
+  background-position-x: 99.5%;
   background-color: #c9bb8a;
 }
 
 .icon.steel {
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/38/Pok%C3%A9mon_Steel_Type_Icon.svg);
+  background-position-y: 50%;
+  background-position-x: 40%;
   background-color: #5695a3;
 }
 
@@ -137,10 +159,12 @@ div.icon img {
 .icon.unknown {
   background-image: url(https://img.icons8.com/flat-round/512/question-mark.png);
   background-color: #25b7d3;
+  background-size: 100%;
 }
 
 .icon.water {
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/0/0b/Pok%C3%A9mon_Water_Type_Icon.svg);
+  background-position-y: 50%;
+  background-position-x: 80%;
   background-color: #539ddf;
 }
 

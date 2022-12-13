@@ -16,7 +16,7 @@ const PokemonCard = (props) => {
           return (
             <div
               key={t}
-              className={`${iconsStyles.icon} ${
+              className={`${iconsStyles.icon} ${iconsStyles.types} ${
                 iconsStyles[t.name ? t.name : t]
               } ${iconsStyles.tooltip}`}
             >

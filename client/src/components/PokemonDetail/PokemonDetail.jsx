@@ -217,7 +217,7 @@ const PokemonDetail = (props) => {
                 {pokemon.types?.map((t) => {
                   return (
                     <div
-                      className={`${iconsStyles.icon} ${
+                      className={`${iconsStyles.icon} ${iconsStyles.types} ${
                         iconsStyles["detail-icon"]
                       } ${iconsStyles[t.name ? t.name : t]} ${
                         iconsStyles.tooltip
